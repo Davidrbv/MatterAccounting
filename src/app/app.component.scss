@@ -1,0 +1,29 @@
+.grid {
+  margin: auto;
+  background-color: white;
+}
+
+.footer {
+  border: 1px solid black;
+  box-shadow: 0px 0px 5px 5px grey;
+}
+
+.img {
+  position: relative;
+  background-size: cover;
+  left: 30%;
+}
+
+.separador {
+  height: 20px;
+  border-bottom: 2px solid grey;
+}
+
+.footer-img {
+  position: relative;
+  left: 45%;
+}
+
+h3 {
+  text-align: end;
+}
