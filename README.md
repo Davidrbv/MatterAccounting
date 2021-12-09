@@ -20,7 +20,7 @@ HomePAge: https://github.com/Davidrbv/MatterAccounting/tree/master/src/app
 
 ## Estructura del proyecto
 <ul>
-  <li>3 Páginas</li>
+  <li>3 Componentes</li>
   <li>2 Servicios</li>
   <li>2 Interfaces</li>
 </ul>
@@ -34,6 +34,12 @@ permitiendonos mantener los datos para cada vez que hacemos uso de la app
 
 <a href="https://github.com/angular/angular">
     <img src="media/logoAngular.png" alt="Logo" width="220" height="100">
+</a>
+
+<br>
+
+<a href="https://www.typescriptlang.org/">
+    <img src="media/typeLogo.png" alt="Logo" width="220" height="100">
 </a>
 
 ## Mockup App
