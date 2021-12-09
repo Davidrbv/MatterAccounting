@@ -1,3 +1,18 @@
-<div class="card">
-    <p-chart type="bar" [data]="datos"></p-chart>
+<div class="grid">
+    <div class="col-6">
+        <!-- Diagrama de barras -->
+        <div class="card">
+            <p-panel header="Diagrama de barras" class=ui-g-6 ui-md-6>
+                <p-chart type="bar" [data]="datos"></p-chart>
+            </p-panel>
+        </div>
+    </div>
+    <div class="col-6">
+        <!-- Diagrama circular -->
+        <div class="card">
+            <p-panel header="Diagrama circular" class=ui-g-6 ui-md-6>
+                <p-chart type="doughnut" [data]="datos2"></p-chart>
+            </p-panel>
+        </div>
+    </div>
 </div>

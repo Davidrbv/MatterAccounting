@@ -1,50 +1,98 @@
 import { Component, OnInit } from '@angular/core';
 import { Factura, FacturasService } from 'src/app/services/facturas.service';
+import { Venta, VentasService } from 'src/app/services/ventas.service';
 
 @Component({
   selector: 'app-estadisticas',
   templateUrl: './estadisticas.component.html',
-  styleUrls: ['./estadisticas.component.scss']
+  styleUrls: ['./estadisticas.component.scss'],
 })
 export class EstadisticasComponent implements OnInit {
-
   datos: any;
+  datos2: any;
 
   facturas: Factura[] = [];
+  ventas: Venta[] = [];
 
-  totales : number [] = [];
+  gasto : number = 0;
+  ingreso: number = 0;
 
-  constructor(private facturasService: FacturasService) { }
+  totalesFacturas: number[] = [];
+  totalesVentas: number[] = [];
 
-  ngOnInit(): void {
+  constructor(
+    private facturasService: FacturasService,
+    private ventasService: VentasService
+  ) {}
 
-    this.facturasService.recogeFacturasStorage().then(facturas => {
+  async ngOnInit() {
+
+    await this.facturasService.recogeFacturasStorage().then((facturas) => {
       this.facturas = facturas;
-      this.facturas.forEach(factura => {        
-        this.totales.push(factura.subtotal);
-      }); 
+      this.facturas.forEach((factura) => {
+        this.totalesFacturas.push(factura.total);
+      });
+      this.gasto = this.totalesFacturas.reduce((a, b) => { return a + b; });
     });
 
-
+    await this.ventasService.recogeVentasStorage().then((ventas) => {
+      this.ventas = ventas;
+      this.ventas.forEach((venta) => {
+        this.totalesVentas.push(venta.total);
+      });
+      this.ingreso = this.totalesVentas.reduce((a, b) => { return a + b; });   
+    });
 
     this.datos = {
-      labels: ['Lunes', 'Martes', 'Miercoles', 'Jueves', 'Viernes', 'Sabado', 'Domingo'],
-      datasets: [{
-          type: 'line',
-          label: 'Importaciones',
-          borderColor: '#ffa726',
-          borderWidth: 2,
-          fill: false,
-          data: this.totales
-      }, {
+      labels: [
+        'Enero',
+        'Febrero',
+        'Marzo',
+        'Abril',
+        'Mayo',
+        'Junio',
+        'Julio',
+        'Agosto',
+        'Septiembre',
+        'Octubre',
+        'Noviembre',
+        'Diciembre',
+      ],
+      datasets: [
+        {
           type: 'bar',
-          label: 'Exportaciones',
-          backgroundColor: '#05b2a1',
-          data: this.totales,
+          label: 'Gastos',
+          backgroundColor: '#FF0000',
+          data: this.totalesFacturas,
           borderColor: 'white',
-          borderWidth: 2
-      }]
+          borderWidth: 2,
+        },
+        {
+          type: 'bar',
+          label: 'Ingresos',
+          backgroundColor: '#00BB2D',
+          data: this.totalesVentas,
+          borderColor: 'white',
+          borderWidth: 2,
+        },
+      ],
+    };
+
+    this.datos2 = {
+      labels: ['Ventas','Gastos'],
+      datasets: [
+          {
+              data: [this.ingreso, this.gasto],
+              backgroundColor: [
+                  "#00BB2D",
+                  "#FF0000"
+              ],
+              hoverBackgroundColor: [
+                  "#FF6384",
+                  "#36A2EB"
+              ]
+          }
+      ]
   };
   }
-
 }

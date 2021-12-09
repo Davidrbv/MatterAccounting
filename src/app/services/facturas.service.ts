@@ -36,6 +36,7 @@ export class FacturasService {
   async grabarFactura(factura: Factura): Promise<Boolean> {
     if(factura.id === null) {
       factura.id = this.contadorFacturas++;
+      factura.total = factura.subtotal * (factura.iva/100);
       this.facturas.push(factura);
     } else {
       this.borraFactura(factura.id);

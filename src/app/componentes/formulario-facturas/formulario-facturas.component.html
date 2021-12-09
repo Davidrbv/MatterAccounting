@@ -58,7 +58,7 @@
                 <td>{{factura.fecha}}</td>
                 <td>{{factura.subtotal}}</td>
                 <td>{{factura.iva}}</td>
-                <td>{{(factura.subtotal * (factura.iva/100)) | currency: 'EUR'}}</td>
+                <td>{{(factura.total) | currency: 'EUR'}}</td>
                 <button pButton type="button" icon="pi pi-trash" class="p-button-raised p-button-rounded p-button-danger" (click)="borrarFactura(factura)"></button>
             </tr>
         </ng-template>

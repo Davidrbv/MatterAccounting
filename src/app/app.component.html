@@ -10,7 +10,7 @@
 
 <body>
     <p-panel>
-        <ng-template pTemplate="header" style="background-color: yellow;">
+        <ng-template pTemplate="header">
             <div class="grid">
                 <div class="col-12">
                     <img class="img" src="../assets/matters.png" alt="Logo Matters">
@@ -18,20 +18,31 @@
                 <div class="grid botones">
                     <div class="col-4">
                         <button pButton type="button" label="Ventas" class="p-button-success boton"
-                            [routerLink]="['/formulario-ventas']" routerLinkActive="active"></button>
+                            [routerLink]="['/formulario-ventas']" routerLinkActive="active" (click)="quitaInicio()"></button>
                     </div>
                     <div class="col-4">
                         <button pButton type="button" label="Facturas" class="p-button-danger boton"
-                            [routerLink]="['/formulario-facturas']" routerLinkActive="active"></button>
+                            [routerLink]="['/formulario-facturas']" routerLinkActive="active" (click)="quitaInicio()"></button>
                     </div>
                     <div class="col-4">
                         <button pButton type="button" label="Estadísticas" class="p-button-warning boton"
-                            [routerLink]="['/estadisticas']" routerLinkActive="active"></button>
+                            [routerLink]="['/estadisticas']" routerLinkActive="active" (click)="quitaInicio()"></button>
                     </div>
                 </div>
             </div>
         </ng-template>
         <ng-template pTemplate="body" class="template flex align-items-right justify-content-end">
+            <div *ngIf="mostrar" class="grid">
+                <div class="col-12">
+                    <h1>Bienvenid@ a MatterAccounting</h1>
+                </div>
+                <div class="col-12">
+                    <img class="flecha" src="../assets/flecha.png" alt="Indicador Botones">
+                </div>
+                <div class="col-12">
+                    <h2>Pulsa en los botones superiores para empezar a registrar tu información</h2>
+                </div>
+            </div>
         </ng-template>
 
         <ng-template pTemplate="footer">

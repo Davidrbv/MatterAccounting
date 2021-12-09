@@ -37,7 +37,9 @@
 </form>
 
 <!-- Separador -->
+
 <div class="separador"></div>
+
 <!-- Información facturas -->
 
 <div class="card">
@@ -58,7 +60,7 @@
                 <td>{{venta.fecha}}</td>
                 <td>{{venta.efectivo}}</td>
                 <td>{{venta.tarjeta}}</td>
-                <td>{{(venta.efectivo + venta.tarjeta) | currency: 'EUR'}}</td>
+                <td>{{venta.total | currency: 'EUR'}}</td>
                 <button pButton type="button" icon="pi pi-trash" class="p-button-raised p-button-rounded p-button-danger" (click)="borrarVenta(venta)"></button>
             </tr>
         </ng-template>

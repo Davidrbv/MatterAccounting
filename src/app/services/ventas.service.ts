@@ -35,6 +35,7 @@ export class VentasService {
   async grabarVenta(venta: Venta): Promise<Boolean> {
     if(venta.id === null) {
       venta.id = this.contadorVentas++;
+      venta.total = venta.efectivo + venta.tarjeta;
       this.ventas.push(venta);
     } else {
       this.borraVenta(venta.id);
