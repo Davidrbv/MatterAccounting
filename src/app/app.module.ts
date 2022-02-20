@@ -7,27 +7,32 @@ import { FormularioFacturasComponent } from './componentes/formulario-facturas/f
 import { FormularioVentasComponent } from './componentes/formulario-ventas/formulario-ventas.component';
 
 import { ReactiveFormsModule } from '@angular/forms';
-import { PanelModule} from 'primeng/panel';
-import { ButtonModule} from 'primeng/button';
-import { InputTextModule} from 'primeng/inputtext';
-import { CardModule} from 'primeng/card';
+import { PanelModule } from 'primeng/panel';
+import { ButtonModule } from 'primeng/button';
+import { InputTextModule } from 'primeng/inputtext';
+import { CardModule } from 'primeng/card';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { AvatarModule } from 'primeng/avatar';
-import { PasswordModule} from 'primeng/password';
-import { FileUploadModule} from 'primeng/fileupload';
-import { HttpClientModule} from '@angular/common/http';
+import { PasswordModule } from 'primeng/password';
+import { FileUploadModule } from 'primeng/fileupload';
+import { HttpClientModule } from '@angular/common/http';
 import { ChipModule } from 'primeng/chip';
-import {MultiSelectModule} from 'primeng/multiselect';
-import {TableModule} from 'primeng/table';
+import { MultiSelectModule } from 'primeng/multiselect';
+import { TableModule } from 'primeng/table';
 import { EstadisticasComponent } from './componentes/estadisticas/estadisticas.component';
-import { ChartModule} from 'primeng/chart';
+import { ChartModule } from 'primeng/chart';
+import { initializeApp, provideFirebaseApp } from '@angular/fire/app';
+import { environment } from '../environments/environment';
+import { provideAuth, getAuth } from '@angular/fire/auth';
+import { provideFirestore, getFirestore } from '@angular/fire/firestore';
+import { provideStorage, getStorage } from '@angular/fire/storage';
 
 @NgModule({
   declarations: [
     AppComponent,
     FormularioFacturasComponent,
     FormularioVentasComponent,
-    EstadisticasComponent
+    EstadisticasComponent,
   ],
   imports: [
     BrowserModule,
@@ -45,9 +50,13 @@ import { ChartModule} from 'primeng/chart';
     ChipModule,
     MultiSelectModule,
     TableModule,
-    ChartModule
+    ChartModule,
+    provideFirebaseApp(() => initializeApp(environment.firebase)),
+    provideAuth(() => getAuth()),
+    provideFirestore(() => getFirestore()),
+    provideStorage(() => getStorage()),
   ],
   providers: [],
-  bootstrap: [AppComponent]
+  bootstrap: [AppComponent],
 })
-export class AppModule { }
+export class AppModule {}

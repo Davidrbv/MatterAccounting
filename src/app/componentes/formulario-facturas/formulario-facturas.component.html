@@ -42,24 +42,24 @@
 
 <div class="card">
     <h2>Facturas registradas</h2>
-    <p-table [value]="facturas">
+    <p-table [value]="(invoices | async)!">
         <ng-template pTemplate="header">
             <tr class="cabecera">
                 <th pSortableColumn="proveedor">Proveedor <p-sortIcon field="proveedor"></p-sortIcon></th>
                 <th pSortableColumn="fecha">Fecha <p-sortIcon field="fecha"></p-sortIcon></th>
-                <th pSortableColumn="subtotal">Subtotal <p-sortIcon field="subtotal"></p-sortIcon></th>
-                <th pSortableColumn="iva">Iva <p-sortIcon field="iva"></p-sortIcon></th>
-                <th pSortableColumn="total">Total <p-sortIcon field="total"></p-sortIcon></th>
+                <th pSortableColumn="codigo">Codigo <p-sortIcon field="codigo"></p-sortIcon></th>
+                <th pSortableColumn="estado">Estado <p-sortIcon field="estado"></p-sortIcon></th>
+                <th pSortableColumn="cantidad">Cantidad <p-sortIcon field="cantidad"></p-sortIcon></th>
             </tr>
         </ng-template>
-        <ng-template pTemplate="body" let-factura>
+        <ng-template pTemplate="body" let-invoice>
             <tr>
-                <td>{{factura.proveedor | titlecase}}</td>
-                <td>{{factura.fecha}}</td>
-                <td>{{factura.subtotal}}</td>
-                <td>{{factura.iva}}</td>
-                <td>{{(factura.total) | currency: 'EUR'}}</td>
-                <button pButton type="button" icon="pi pi-trash" class="p-button-raised p-button-rounded p-button-danger" (click)="borrarFactura(factura)"></button>
+                <td>{{invoice.proveedor | titlecase}}</td>
+                <td>{{invoice.fecha}}</td>
+                <td>{{invoice.codigo}}</td>
+                <td>{{invoice.estado}}</td>
+                <td>{{(invoice.cantidad) | currency: 'EUR'}}</td>
+                <button pButton type="button" icon="pi pi-trash" class="p-button-raised p-button-rounded p-button-danger" (click)="deleteInvoice(invoice)"></button>
             </tr>
         </ng-template>
     </p-table>

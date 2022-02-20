@@ -1,50 +1,52 @@
 import { Component, OnInit } from '@angular/core';
 import { FormControl, FormGroup } from '@angular/forms';
-import { Factura, FacturasService } from 'src/app/services/facturas.service';
+import { Observable } from 'rxjs';
+import { Invoice } from 'src/app/model/invoice';
+import { InvoiceService } from 'src/app/services/invoice.service';
 
 @Component({
   selector: 'app-formulario-facturas',
   templateUrl: './formulario-facturas.component.html',
-  styleUrls: ['./formulario-facturas.component.scss']
+  styleUrls: ['./formulario-facturas.component.scss'],
 })
 export class FormularioFacturasComponent implements OnInit {
-
-  facturas: Factura[] = [];
+  
+  invoices: Observable<Invoice[]> =  {} as Observable<Invoice[]>;
+  invoicesFilter: Invoice[] = [];
+  estado: boolean =  false;
   formulario: FormGroup;
 
-  constructor(public facturasService: FacturasService ) { 
-
+  constructor(public invoiceService: InvoiceService) {
+    
     this.formulario = new FormGroup({
-
-      id: new FormControl,
-      proveedor: new FormControl,
-      fecha: new FormControl,
-      subtotal: new FormControl,
-      iva: new FormControl,
+      codigo: new FormControl(),
+      fecha: new FormControl(),
+      cantidad: new FormControl(),
+      proveedor: new FormControl(),
+      estado: new FormControl(),
     });
-
   }
 
   ngOnInit(): void {
-    this.facturasService.recogeFacturasStorage().then(facturas => this.facturas = facturas);
+    this.invoices = this.invoiceService.getInvoices();
+    this.invoices.subscribe(data => this.invoicesFilter = data);
   }
 
-  onSubmit(){
-    if(this.formulario.value.proveedor !== null &&
-       this.formulario.value.fecha !== null &&
-       this.formulario.value.subtotal !== null &&
-       this.formulario.value.iva !== null){
-      this.facturasService.grabarFactura(this.formulario.value);
+  onSubmit() {
+    if (
+      this.formulario.value.codigo !== null &&
+      this.formulario.value.fecha !== null &&
+      this.formulario.value.cantidad !== null &&
+      this.formulario.value.proveedor !== null &&
+      this.formulario.value.estado !== null
+    ) {
+      this.invoiceService.addInvoice(this.formulario.value);
       location.reload();
-    }   
+    }
   }
 
-  borrarFactura(factura: Factura){
-    this.facturasService.borraFactura(factura.id);
+  deleteInvoice(invoice: Invoice) {
+    this.invoiceService.deleteInvoice(invoice.invoiceId);
     location.reload();
   }
-
-
-
 }
-

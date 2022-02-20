@@ -1,6 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { FormControl, FormGroup } from '@angular/forms';
-import { Venta, VentasService } from 'src/app/services/ventas.service';
+import { Observable } from 'rxjs';
+import { Sale } from 'src/app/model/sale';
+import { SaleService } from 'src/app/services/sale.service';
 
 @Component({
   selector: 'app-formulario-ventas',
@@ -9,13 +11,11 @@ import { Venta, VentasService } from 'src/app/services/ventas.service';
 })
 export class FormularioVentasComponent implements OnInit {
 
-  ventas: Venta[] = [];
-  formulario: FormGroup;
+  sales: Observable<Sale[]> = {} as Observable<Sale[]>;
+  saleForm: FormGroup;
 
-  constructor(private ventasService: VentasService) {
-    this.formulario = new FormGroup({
-      id: new FormControl(),
-      turno: new FormControl(),
+  constructor(private saleService: SaleService) {
+    this.saleForm = new FormGroup({
       fecha: new FormControl(),
       efectivo: new FormControl(),
       tarjeta: new FormControl(),
@@ -23,25 +23,22 @@ export class FormularioVentasComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    this.ventasService
-      .recogeVentasStorage()
-      .then((ventas) => (this.ventas = ventas));
+    this.sales = this.saleService.getSales();
   }
 
   onSubmit() {
     if (
-      this.formulario.value.turno !== null &&
-      this.formulario.value.fecha !== null &&
-      this.formulario.value.efectivo !== null &&
-      this.formulario.value.tarjeta !== null
+      this.saleForm.value.fecha !== null &&
+      this.saleForm.value.efectivo !== null &&
+      this.saleForm.value.tarjeta !== null
     ) {
-      this.ventasService.grabarVenta(this.formulario.value);
+      this.saleService.addSale(this.saleForm.value);
       location.reload();
     }
   }
 
-  borrarVenta(venta: Venta) {
-    this.ventasService.borraVenta(venta.id);
+  deleteSale(sale: Sale) {
+    this.saleService.deleteSale(sale.saleId);
     location.reload();
   }
 }

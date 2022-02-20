@@ -109,6 +109,16 @@
             ],
             "scripts": []
           }
+        },
+        "deploy": {
+          "builder": "@angular/fire:deploy",
+          "options": {
+            "prerender": false,
+            "ssr": false,
+            "browserTarget": "MatterAccounting:build:production",
+            "firebaseProject": "matterionic",
+            "firebaseHostingSite": "matterionic"
+          }
         }
       }
     }

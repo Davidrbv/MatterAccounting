@@ -1,0 +1,14 @@
+{
+  "projects": {
+    "default": "matterionic"
+  },
+  "targets": {
+    "matterionic": {
+      "hosting": {
+        "MatterAccounting": [
+          "matterionic"
+        ]
+      }
+    }
+  }
+}

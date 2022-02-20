@@ -1,6 +1,9 @@
 import { Component, OnInit } from '@angular/core';
-import { Factura, FacturasService } from 'src/app/services/facturas.service';
-import { Venta, VentasService } from 'src/app/services/ventas.service';
+import { Observable } from 'rxjs';
+import { Invoice } from 'src/app/model/invoice';
+import { Sale } from 'src/app/model/sale';
+import { InvoiceService } from 'src/app/services/invoice.service';
+import { SaleService } from 'src/app/services/sale.service';
 
 @Component({
   selector: 'app-estadisticas',
@@ -11,8 +14,8 @@ export class EstadisticasComponent implements OnInit {
   datos: any;
   datos2: any;
 
-  facturas: Factura[] = [];
-  ventas: Venta[] = [];
+  invoices: Observable<Invoice[]> = {} as Observable<Invoice[]>;
+  sales: Observable<Sale[]> = {} as Observable<Sale[]>;
 
   gasto : number = 0;
   ingreso: number = 0;
@@ -21,27 +24,14 @@ export class EstadisticasComponent implements OnInit {
   totalesVentas: number[] = [];
 
   constructor(
-    private facturasService: FacturasService,
-    private ventasService: VentasService
+    private invoiceService: InvoiceService,
+    private saleService: SaleService
   ) {}
 
-  async ngOnInit() {
+  ngOnInit() {
 
-    await this.facturasService.recogeFacturasStorage().then((facturas) => {
-      this.facturas = facturas;
-      this.facturas.forEach((factura) => {
-        this.totalesFacturas.push(factura.total);
-      });
-      this.gasto = this.totalesFacturas.reduce((a, b) => { return a + b; });
-    });
-
-    await this.ventasService.recogeVentasStorage().then((ventas) => {
-      this.ventas = ventas;
-      this.ventas.forEach((venta) => {
-        this.totalesVentas.push(venta.total);
-      });
-      this.ingreso = this.totalesVentas.reduce((a, b) => { return a + b; });   
-    });
+    this.invoices = this.invoiceService.getInvoices();
+    this.sales = this.saleService.getSales();
 
     this.datos = {
       labels: [
