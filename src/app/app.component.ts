@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { AuthService } from './services/auth.service';
 
 @Component({
   selector: 'app-root',
@@ -6,17 +7,12 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./app.component.scss']
 })
 export class AppComponent implements OnInit {
-  
-  title = 'MatterAccounting';
 
-  mostrar: boolean = false;
-
-
-  ngOnInit(): void {
-    this.mostrar = true;
+  constructor(public authService: AuthService){
+    
   }
 
-  quitaInicio(){
-    this.mostrar = false;
+  ngOnInit(): void {
+    
   }
 }

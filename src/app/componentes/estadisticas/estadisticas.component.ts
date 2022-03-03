@@ -17,11 +17,11 @@ export class EstadisticasComponent implements OnInit {
   invoices: Observable<Invoice[]> = {} as Observable<Invoice[]>;
   sales: Observable<Sale[]> = {} as Observable<Sale[]>;
 
-  gasto : number = 0;
-  ingreso: number = 0;
+  cost: number = 0;
+  sale: number = 0;
 
-  totalesFacturas: number[] = [];
-  totalesVentas: number[] = [];
+  invoicesTotal: number[] = [];
+  salesTotal: number[] = [];
 
   constructor(
     private invoiceService: InvoiceService,
@@ -29,10 +29,22 @@ export class EstadisticasComponent implements OnInit {
   ) {}
 
   ngOnInit() {
-
     this.invoices = this.invoiceService.getInvoices();
-    this.sales = this.saleService.getSales();
+    this.invoices.subscribe((item) => {
+      item.filter((data) => {
+        this.cost += data.cantidad;
+        this.invoicesTotal.push(this.cost);
+      });
+    });
 
+    this.sales = this.saleService.getSales();
+    this.sales.subscribe((item) => {
+      item.filter((data) => {
+        this.sale += data.total;
+        this.salesTotal.push(this.sale);
+      });
+    });
+    
     this.datos = {
       labels: [
         'Enero',
@@ -51,17 +63,17 @@ export class EstadisticasComponent implements OnInit {
       datasets: [
         {
           type: 'bar',
-          label: 'Gastos',
+          label: 'Sales',
           backgroundColor: '#FF0000',
-          data: this.totalesFacturas,
+          data: this.salesTotal,
           borderColor: 'white',
           borderWidth: 2,
         },
         {
           type: 'bar',
-          label: 'Ingresos',
+          label: 'Costs',
           backgroundColor: '#00BB2D',
-          data: this.totalesVentas,
+          data: this.invoicesTotal,
           borderColor: 'white',
           borderWidth: 2,
         },
@@ -69,20 +81,14 @@ export class EstadisticasComponent implements OnInit {
     };
 
     this.datos2 = {
-      labels: ['Ventas','Gastos'],
+      labels: ['Sales', 'Costs'],
       datasets: [
-          {
-              data: [this.ingreso, this.gasto],
-              backgroundColor: [
-                  "#00BB2D",
-                  "#FF0000"
-              ],
-              hoverBackgroundColor: [
-                  "#FF6384",
-                  "#36A2EB"
-              ]
-          }
-      ]
-  };
+        {
+          data: [this.salesTotal, this.invoicesTotal],
+          backgroundColor: ['#FF0000','#00BB2D'],
+          hoverBackgroundColor: ['#FF6384', '#36A2EB'],
+        },
+      ],
+    };
   }
 }

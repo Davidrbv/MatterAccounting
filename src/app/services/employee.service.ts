@@ -19,38 +19,37 @@ import {
 
 export class EmployeeService {
   
-  pathToEmployees = `users/${this.authService.getCurrentUser().uid}/employees`;
 
   constructor(private authService: AuthService, private fireStore: Firestore) {}
 
   /* Get one Employee */
   getEmployee(id: string): Observable<Employee> {
-    return docData(doc(this.fireStore, `${this.pathToEmployees}/${id}`), {
+    return docData(doc(this.fireStore, `users/${this.authService.getCurrentUser().uid}/employees/${id}`), {
       idField: 'employeeId',
     }) as Observable<Employee>;
   }
 
   /* Get All Employees */
   getEmployees(): Observable<Employee[]> {
-    return collectionData(collection(this.fireStore, this.pathToEmployees), {
+    return collectionData(collection(this.fireStore, `users/${this.authService.getCurrentUser().uid}/employees`), {
       idField: 'employeeId',
     }) as Observable<Employee[]>;
   }
 
   /* Add Employee */
   async addEmployee(employee: Employee) {
-    await addDoc(collection(this.fireStore, this.pathToEmployees), employee);
+    await addDoc(collection(this.fireStore, `users/${this.authService.getCurrentUser().uid}/employees`), employee);
   }
 
   /* Delete Employee */
   async deleteEmployee(id: string) {
-    await deleteDoc(doc(this.fireStore, `${this.pathToEmployees}/${id}`));
+    await deleteDoc(doc(this.fireStore, `users/${this.authService.getCurrentUser().uid}/employees/${id}`));
   }
 
   /* Update Employee */
   async updateEmployee(employee: Employee) {
     await setDoc(
-      doc(this.fireStore, `${this.pathToEmployees}/${employee.employeeId}`),
+      doc(this.fireStore, `users/${this.authService.getCurrentUser().uid}/employees/${employee.employeeId}`),
       employee
     );
   }

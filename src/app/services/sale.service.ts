@@ -9,37 +9,35 @@ import { AuthService } from './auth.service';
 })
 export class SaleService {
 
-  pathToSales = `users/${this.authService.getCurrentUser().uid}/sales`;
-
   constructor(private fireStore: Firestore,
               private authService : AuthService) {}
 
   /* Get one Sale */
   getSale(id : string): Observable<Sale>{
-    return docData(doc(this.fireStore,`${this.pathToSales}/${id}`),{
+    return docData(doc(this.fireStore,`users/${this.authService.getCurrentUser().uid}/sales/${id}`),{
       idField: 'saleId',
     }) as Observable<Sale>
   }
 
   /* Get All Sale */
   getSales(): Observable<Sale[]>{
-    return collectionData(collection(this.fireStore, this.pathToSales), {
+    return collectionData(collection(this.fireStore, `users/${this.authService.getCurrentUser().uid}/sales`), {
       idField: 'saleId',
     }) as Observable<Sale[]>;
   }
 
   /* Add Sale */
   async addSale(sale : Sale){
-    await addDoc(collection(this.fireStore, this.pathToSales),sale);
+    await addDoc(collection(this.fireStore, `users/${this.authService.getCurrentUser().uid}/sales`),sale);
   }
 
   /* Delete Sale */
   async deleteSale(id: string){
-    await deleteDoc(doc(this.fireStore,`${this.pathToSales}/${id}`));
+    await deleteDoc(doc(this.fireStore,`users/${this.authService.getCurrentUser().uid}/sales/${id}`));
   }
 
   /* Update Sale */
   async updateSale(sale : Sale){
-    await setDoc(doc(this.fireStore,`${this.pathToSales}/${sale.saleId}`),sale)
+    await setDoc(doc(this.fireStore,`users/${this.authService.getCurrentUser().uid}/sales/${sale.saleId}`),sale)
   }
 }

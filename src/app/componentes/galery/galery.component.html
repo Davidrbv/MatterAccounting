@@ -1,0 +1,30 @@
+<h1 >Galery</h1>
+<div class="content-section implementation">
+    <div class="card">
+        <p-galleria #galleria [value]="(images | async)!" [(activeIndex)]="activeIndex" [numVisible]="5"
+            [containerStyle]="{'max-width':'640px'}" [containerClass]="galleriaClass()"
+            [showThumbnails]="showThumbnails" [showItemNavigators]="true" [showItemNavigatorsOnHover]="true"
+            [circular]="true" [autoPlay]="true" [transitionInterval]="3000">
+            <ng-template pTemplate="item" let-item>
+                <img [src]="item.formato"
+                    [ngStyle]="{'width': !fullscreen ? '100%' : '', 'display': !fullscreen ? 'block' : ''}" />
+            </ng-template>
+            <ng-template pTemplate="thumbnail" let-item>
+                <div class="flex justify-content-evenly align-items-center">
+                    <img class="image" [src]="item.formato" />
+                </div>
+            </ng-template>
+            <ng-template pTemplate="footer" let-item>
+                <div class="custom-galleria-footer">
+                    <button type="button" pButton icon="pi pi-list" (click)="onThumbnailButtonClick()"></button>
+                    <button type="button" pButton [icon]="fullScreenIcon()" (click)="toggleFullScreen()"
+                        class="fullscreen-button"></button>
+                </div>
+            </ng-template>
+        </p-galleria>
+    </div>
+</div>
+<div class="btn flex justify-content-center align-items-center">
+    <button pButton type="button" label="Add Photo" class="p-button-primary" icon="pi pi-plus" iconPos="right"
+        (click)="addPhoto()"></button>
+</div>

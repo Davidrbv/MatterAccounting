@@ -1,0 +1,27 @@
+<p-messages [(value)]="msg" [enableService]="false" [showTransitionOptions]="'500ms'" [hideTransitionOptions]="'500ms'"></p-messages>
+<p-card class="card flex justify-content-center align-content-center">
+    <ng-template pTemplate="header">
+        <p>Welcome Matters</p>
+    </ng-template>
+    <ng-template pTemplate="body">
+        <div class="grid">
+            <span class="col-12 p-float-label">
+                <input class="col-12" type="email" pInputText [(ngModel)]="email"
+                    pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,3}$" />
+                <label for="float-input">Email</label>
+            </span>
+            <div class="col-12"></div>
+            <span class="col-12 p-float-label">
+                <input class="col-12" type="password" pInputText [(ngModel)]="password" />
+                <label for="float-input">Password</label>
+            </span>
+    
+            <div class="btn col-12 flex justify-content-evenly">
+                <button (click)="login()" pButton type="button" label="Login" class="p-button"></button>
+                <button (click)="logOut()" pButton type="button" label="LogOut" class="p-button-danger"></button>
+            </div>
+        </div>
+    </ng-template>
+</p-card>
+
+<p-toast></p-toast>

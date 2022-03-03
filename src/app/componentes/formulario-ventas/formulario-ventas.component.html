@@ -1,62 +1,117 @@
-<h1>Registro de Ventas</h1>
-
-<!-- Formulario facturas -->
-
+<p>Sales Register</p>
+<!-- Sales form -->
 <form [formGroup]="saleForm" class="formulario">
     <div class="grid encuadre">
         <div class="col-12">
             <div class="grid">
-                <div class="col-4">
-                    <div class="p-inputgroup" [style] ="{'margin-bottom': '2em'}">
+                <div class="col-3">
+                    <div class="p-inputgroup">
                         <span class="p-inputgroup-addon"><i class="pi pi-calendar"></i></span>
-                        <input type="date" pInputText placeholder="Fecha" formControlName="fecha">         
+                        <input type="date" pInputText placeholder="Sale date" formControlName="fecha">         
                     </div>
                 </div>
-                <div class="col-4">
-                    <div class="p-inputgroup" [style] ="{'margin-bottom': '2em'}">
+                <div class="col-3">
+                    <div class="p-inputgroup" >
                         <span class="p-inputgroup-addon">€</span>
-                        <input type="number" min="0" pInputText placeholder="Efectivo" formControlName="efectivo">         
+                        <input type="number" min="0" pInputText placeholder="Cash" formControlName="efectivo">         
                     </div>
                 </div>
-                <div class="col-4">
-                    <div class="p-inputgroup" [style] ="{'margin-bottom': '2em'}">
+                <div class="col-3">
+                    <div class="p-inputgroup">
                         <span class="p-inputgroup-addon">€</span> 
-                        <input type="number" min="0" pInputText placeholder="Tarjeta" formControlName="tarjeta">       
+                        <input type="number" min="0" pInputText placeholder="Card" formControlName="tarjeta">       
                     </div>
                 </div>
-                <p-button label="Registrar venta" icon="pi pi-check" iconPos="right" (click)="onSubmit()"></p-button>
+                <div class="col-3 flex justify-content-center align-items-end">
+                    <button pButton type="button" label="Add" class="p-button-primary boton" icon="pi pi-check" iconPos="right" (click)="onSubmit()"></button>
+                </div>    
             </div>
         </div>
     </div>
 </form>
 
-<!-- Separador -->
+<!-- Separator -->
 
 <div class="separador"></div>
 
-<!-- Información facturas -->
+<!-- Sales information -->
 
 <div class="card">
-    <h2>Ventas registradas</h2>
-    <p-table [value]="(sales |async)!">
+    <p>- Sales -</p>
+    <p-table [value]="(sales | async)!">
         <ng-template pTemplate="header">
             <tr class="cabecera">
-                <th pSortableColumn="turno">Turno <p-sortIcon field="turno"></p-sortIcon></th>
-                <th pSortableColumn="fecha">Fecha <p-sortIcon field="fecha"></p-sortIcon></th>
-                <th pSortableColumn="efectivo">Efectivo <p-sortIcon field="efectivo"></p-sortIcon></th>
-                <th pSortableColumn="tarjeta">Tarjeta <p-sortIcon field="tarjeta"></p-sortIcon></th>
-                <th pSortableColumn="total">Total <p-sortIcon field="total"></p-sortIcon></th>
+                <th pSortableColumn="fecha">Date<p-sortIcon field="fecha"></p-sortIcon></th>
+                <th pSortableColumn="efectivo">Cash<p-sortIcon field="efectivo"></p-sortIcon></th>
+                <th pSortableColumn="tarjeta">Card<p-sortIcon field="tarjeta"></p-sortIcon></th>
+                <th pSortableColumn="total">Total<p-sortIcon field="total"></p-sortIcon></th>
+                <th></th>
             </tr>
         </ng-template>
         <ng-template pTemplate="body" let-sale>
             <tr>
-                <td>{{sale.turno | titlecase}}</td>
-                <td>{{sale.fecha}}</td>
-                <td>{{sale.efectivo}}</td>
-                <td>{{sale.tarjeta}}</td>
+                <td>{{sale.fecha | date :'dd/MM/yyyy'}}</td>
+                <td>{{sale.efectivo | currency : 'EUR'}}</td>
+                <td>{{sale.tarjeta | currency : 'EUR'}}</td>
                 <td>{{sale.total | currency: 'EUR'}}</td>
-                <button pButton type="button" icon="pi pi-trash" class="p-button-raised p-button-rounded p-button-danger" (click)="deleteSale(sale)"></button>
+                <td class="flex justify-content-evenly">
+                    <button pButton type="button" icon="pi pi-pencil"
+                        class="p-button-raised p-button-rounded p-button-primary" (click)="editSale(sale)">
+                    </button>
+                    <button pButton type="button" icon="pi pi-trash"
+                        class="p-button-raised p-button-rounded p-button-danger"
+                        (click)="confirmDeleteSale(sale)">
+                    </button>
+                </td>
             </tr>
         </ng-template>
     </p-table>
+    <!-- Confirm delete dialog -->
+    <p-confirmDialog header="Confirmation" icon="pi pi-exclamation-triangle"></p-confirmDialog>
 </div>
+
+
+<!-- Edit Sale -->
+
+<div class="flex shadow-6">
+    <p-dialog [(visible)]="displayEditForm" [breakpoints]="{'960px': '75vw'}" [style]="{width: '30vw'}"
+        [draggable]="false" [resizable]="false">
+        <ng-template pTemplate="header">
+            <h1>Edit sale</h1>
+        </ng-template>
+
+        <form [formGroup]="saleForm">
+            <div class="card">
+                <div class="formEdit flex flex-column">
+                    <div>
+                        <div class="p-inputgroup">
+                            <span class="p-inputgroup-addon"><i class="pi pi-calendar"></i></span>
+                            <input type="date" pInputText placeholder="Fecha" formControlName="fecha">         
+                        </div>
+                    </div>
+                    <div>
+                        <div class="p-inputgroup" >
+                            <span class="p-inputgroup-addon">€</span>
+                            <input type="number" min="0" pInputText placeholder="Efectivo" formControlName="efectivo">         
+                        </div>
+                    </div>
+                    <div>
+                        <div class="p-inputgroup">
+                            <span class="p-inputgroup-addon">€</span> 
+                            <input type="number" min="0" pInputText placeholder="Tarjeta" formControlName="tarjeta">       
+                        </div>
+                    </div>   
+                </div>
+            </div>
+        </form>
+
+        <ng-template pTemplate="footer">
+            <p-button (click)="editCancel()" label="Cancel" styleClass="p-button-outlined p-button-danger">
+            </p-button>
+            <p-button (click)="updateSale()" type="submit" label="Save"
+                styleClass="p-button-outlined p-button-success"></p-button>
+        </ng-template>
+    </p-dialog>
+</div>
+
+<p-toast></p-toast>

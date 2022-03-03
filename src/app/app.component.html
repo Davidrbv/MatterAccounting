@@ -1,65 +1,53 @@
-<!DOCTYPE html>
-<html lang="en">
-
-<head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Matters</title>
-</head>
-
-<body>
-    <p-panel>
-        <ng-template pTemplate="header">
-            <div class="grid">
-                <div class="col-12">
-                    <img class="img" src="../assets/matters.png" alt="Logo Matters">
+<p-panel>
+    <ng-template pTemplate="header" class="grid">
+        <div class="container col-12">
+            <div class="col 12 flex justify-content-center align-items-center">
+                <img class="img" src="../assets/matters.png" alt="Logo Matters">
+            </div>
+            <div class="col 12 flex align-items-center justify-content-center mt-4">
+                <div class="col-2 flex align-items-center justify-content-center">
+                    <button pButton type="button" label="Login" class="p-button boton" [routerLink]="['/login']"
+                        routerLinkActive="active"></button>
                 </div>
-                <div class="grid botones">
-                    <div class="col-4">
-                        <button pButton type="button" label="Ventas" class="p-button-success boton"
-                            [routerLink]="['/formulario-ventas']" routerLinkActive="active" (click)="quitaInicio()"></button>
-                    </div>
-                    <div class="col-4">
-                        <button pButton type="button" label="Facturas" class="p-button-danger boton"
-                            [routerLink]="['/formulario-facturas']" routerLinkActive="active" (click)="quitaInicio()"></button>
-                    </div>
-                    <div class="col-4">
-                        <button pButton type="button" label="Estadísticas" class="p-button-warning boton"
-                            [routerLink]="['/estadisticas']" routerLinkActive="active" (click)="quitaInicio()"></button>
-                    </div>
+                <div *ngIf="authService.getCurrentUser()" class="col-2 flex align-items-center justify-content-center">
+                    <button pButton type="button" label="Sales" class="p-button-success"
+                        [routerLink]="['/formulario-ventas']" routerLinkActive="active"></button>
+                </div>
+                <div *ngIf="authService.getCurrentUser()" class="col-2 flex align-items-center justify-content-center">
+                    <button pButton type="button" label="Invoices" class="p-button-danger"
+                        [routerLink]="['/formulario-facturas']" routerLinkActive="active"></button>
+                </div>
+                <div *ngIf="authService.getCurrentUser()" class="col-2 flex align-items-center justify-content-center">
+                    <button pButton type="button" label="Employees" class="p-button-warning"
+                        [routerLink]="['/employees']" routerLinkActive="active"></button>
+                </div>
+                <div *ngIf="authService.getCurrentUser()" class="col-2 flex align-items-center justify-content-center">
+                    <button pButton type="button" label="Galery" class="flex bg-pink-500 border-pink-500"
+                        [routerLink]="['/galery']" routerLinkActive="active"></button>
+                </div>
+                <div *ngIf="authService.getCurrentUser()" class="col-2 flex align-items-center justify-content-center">
+                    <button pButton type="button" label="Statics" class="p-button-secondary"
+                        [routerLink]="['/estadisticas']" routerLinkActive="active"></button>
                 </div>
             </div>
-        </ng-template>
-        <ng-template pTemplate="body" class="template flex align-items-right justify-content-end">
-            <div *ngIf="mostrar" class="grid">
-                <div class="col-12">
-                    <h1>Bienvenid@ a MatterAccounting</h1>
-                </div>
-                <div class="col-12">
-                    <img class="flecha" src="../assets/flecha.png" alt="Indicador Botones">
-                </div>
-                <div class="col-12">
-                    <h2>Pulsa en los botones superiores para empezar a registrar tu información</h2>
-                </div>
-            </div>
-        </ng-template>
+        </div>
+    </ng-template>
+    <ng-template pTemplate="body" class="template flex align-items-right justify-content-end">
 
-        <ng-template pTemplate="footer">
-            <div class="grid footer">
-                <div class="col-4">
-                    <h3>David Rodríguez - Barbero Verdera</h3>
-                </div>
-                <div class="col-4">
-                    <img class="footer-img" src="../assets/logo.png" alt="logopequeño">
-                </div>
-                <div class="col-4">
-                    <h4> &#9400; All rights reserved</h4>
-                </div>
-            </div>
-        </ng-template>
-        <router-outlet></router-outlet>
-    </p-panel>
-</body>
+    </ng-template>
 
-</html>
+    <ng-template pTemplate="footer">
+        <div class="footer flex justify-content-around align-items-center">
+            <div>
+                <h3>David Rodríguez - Barbero Verdera</h3>
+            </div>
+            <div>
+                <img class="footer-img" src="../assets/logo.png" alt="logopequeño">
+            </div>
+            <div>
+                <h3> &#9400; All rights reserved</h3>
+            </div>
+        </div>
+    </ng-template>
+    <router-outlet></router-outlet>
+</p-panel>

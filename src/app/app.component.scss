@@ -1,39 +1,25 @@
-.grid {
-  margin: auto;
-  background-color: white;
+::ng-deep .p-panel-header {
+  background-color: white !important;
+}
+
+::ng-deep .p-panel-footer {
+  padding: 0 !important;
+  background-color: rgb(252, 0, 0) !important;
+}
+
+img{
+  width: 10%;
 }
 
 .footer {
-  border: 1px solid black;
-  box-shadow: 0px 0px 5px 5px grey;
+  margin: 0;
+  border: 2px solid black;
+  color: white;
 }
 
-.img {
-  position: relative;
-  background-size: cover;
-  left: 30%;
-}
-
-.separador {
-  height: 20px;
-  border-bottom: 2px solid grey;
-}
-
-.footer-img {
-  position: relative;
-  left: 45%;
-}
-
-h3 {
-  text-align: end;
-}
-
-h1,h2{
+.footer div {
+  display: flex;
+  width: 33%;
+  justify-content: center;
   text-align: center;
-}
-
-.flecha{
-  position: relative;
-  width: 10%;
-  left: 45%;
 }

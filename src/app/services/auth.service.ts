@@ -13,6 +13,7 @@ import {
   providedIn: 'root',
 })
 export class AuthService {
+  
   constructor(private auth: Auth) {}
 
   /* Log with Firebase */

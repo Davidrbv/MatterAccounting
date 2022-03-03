@@ -1,18 +1,9 @@
-h1{
+p{
+  font-weight: bold;
   text-align: center;
   font-size: 30px;
   color: rgb(255, 0, 0);
   margin-bottom: 30px;
-}
-
-h2 {
-  text-align: center;
-  font-size: 30px;
-  color: rgb(255, 0, 0); 
-}
-
-p-button {
-  margin: auto;
 }
 
 .separador {
@@ -21,7 +12,7 @@ p-button {
 }
 
 .cabecera {
-  font-size: 20px;
+  font-size: 1.4em;
   font-weight: bold;
   border: 2px solid black;
 }
@@ -29,5 +20,8 @@ p-button {
 .encuadre {
   border: 1px solid black;
   box-shadow: 0px 0px 5px 5px grey;
-  box-shadow: 5px grey;
+}
+
+.formEdit > div{
+  margin: 5%;
 }

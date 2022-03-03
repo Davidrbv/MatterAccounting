@@ -11,7 +11,6 @@ export const environment = {
     apiKey: 'AIzaSyCmnh9k8HjwL1JRC0uN4Qr9TQSjEHBu2iQ',
     authDomain: 'matterionic.firebaseapp.com',
     messagingSenderId: '120324672003',
-    databaseURL: 'gs://matterionic.appspot.com'
   },
   production: false
 };
