@@ -20,9 +20,9 @@ HomePAge: https://github.com/Davidrbv/MatterAccounting/tree/master/src/app
 
 ## Estructura del proyecto
 <ul>
-  <li>3 Componentes</li>
-  <li>2 Servicios</li>
-  <li>2 Interfaces</li>
+  <li>8 Componentes</li>
+  <li>6 Servicios</li>
+  <li>5 Interfaces</li>
 </ul>
 
 <br>
@@ -42,8 +42,16 @@ permitiendonos mantener los datos para cada vez que hacemos uso de la app
     <img src="media/typeLogo.png" alt="Logo" width="220" height="100">
 </a>
 
+<br>
+
+<a href="https://www.https://www.primefaces.org/primeng">
+    <img src="media/logoprime.png" alt="Logo" width="220" height="100">
+</a>
+
 ## Mockup App
-<img src="media/homeAccounting.png" alt="Logo" width="300" height="300">
+<img src="media/login.png" alt="Logo" width="300" height="300">
 <img src="media/facturasAccounting.png" alt="Logo" width="300" height="300">
-<img src="media/ventasAccounting.png" alt="Logo" width="300" height="300">
-<img src="media/estadisticasAccounting.png" alt="Logo" width="300" height="300">
+<img src="media/sales.png" alt="Logo" width="300" height="300">
+<img src="media/employee.png" alt="Logo" width="300" height="300">
+<img src="media/galery.png" alt="Logo" width="300" height="300">
+<img src="statics.png" alt="Logo" width="300" height="300">
