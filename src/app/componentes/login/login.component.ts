@@ -1,6 +1,8 @@
+import { DatePipe } from '@angular/common';
 import { Component, OnInit } from '@angular/core';
 import { Message, MessageService } from 'primeng/api';
 import { AuthService } from 'src/app/services/auth.service';
+import { UserService } from 'src/app/services/user.service';
 
 @Component({
   selector: 'app-login',
@@ -12,13 +14,17 @@ export class LoginComponent implements OnInit {
   email: string = '';
   password: string = '';
   msg: Message[] = [];
+  date: string = '';
 
   constructor(
     private authService: AuthService,
     private messageService: MessageService,
+    private userService: UserService
   ) {}
 
-  ngOnInit(): void {}
+  ngOnInit(): void {
+    
+  }
 
   async login() {
     if (this.email !== '' && this.password !== '') {
@@ -27,13 +33,16 @@ export class LoginComponent implements OnInit {
         this.password
       );
       if (connectionSuccess) {
-        this.msg = [
-          {
+        this.userService.getDateFromStorage().then(data => {
+          if(data !== null) this.date = data.toString();
+          else this.date = 'Welcome home, huma!!'
+          this.msg = [{
             severity: 'success',
-            summary: 'Welcome',
-            detail: 'What do you want to do today? ',
-          },
-        ];
+            summary: 'Hello!!',
+            detail: this.date
+          }]
+        })
+        this.userService.saveDateIntoStorage();
         setTimeout(() => {
           this.msg = [];
         }, 2000);

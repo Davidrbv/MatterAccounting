@@ -86,7 +86,7 @@ export class EstadisticasComponent implements OnInit {
         {
           data: [this.salesTotal, this.invoicesTotal],
           backgroundColor: ['#FF0000','#00BB2D'],
-          hoverBackgroundColor: ['#FF6384', '#36A2EB'],
+          hoverBackgroundColor: ['#FF6384', '#00BB21'],
         },
       ],
     };

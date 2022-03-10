@@ -43,7 +43,7 @@
                 <div class="col-12 flex justify-content-evenly align-items-center">
                     <button pButton type="button" label="Save" class="p-button-success boton" icon="pi pi-check"
                         iconPos="right" (click)="onSubmit()"></button>
-                        <button pButton type="button" label="Add" class="p-button-primary boton" icon="pi pi-check"
+                    <button pButton type="button" label="Add" class="p-button-primary boton" icon="pi pi-check"
                         iconPos="right" (click)="newImageUpload()"></button>
                 </div>
             </div>
@@ -53,7 +53,7 @@
 
 <!-- Employees carousel -->
 
-<div>
+<div class="carusel">
     <p-carousel [value]="(employees | async)!" [numVisible]="3" [numScroll]="3" [circular]="false"
         [responsiveOptions]="responsiveOptions">
         <ng-template pTemplate="header">
@@ -63,7 +63,8 @@
             <div class="product-item">
                 <div class="product-item-content">
                     <div class="imagen mb-1">
-                        <img [src]="employee.imagen || '../../../assets/empleados.png'" [alt]="employee.nombre" class="product-image" />
+                        <img [src]="employee.imagen || '../../../assets/empleados.png'" [alt]="employee.nombre"
+                            class="product-image" />
                     </div>
                     <div>
                         <h2 class="mb-1">{{employee.nombre | titlecase}}</h2>
@@ -101,6 +102,9 @@
         <form [formGroup]="employeeForm" class="formulario">
             <div class="card">
                 <div class="formEdit flex flex-column">
+                    <div class="avatar">
+                        <p-avatar image='employee.image || ../../../assets/empleados.png' styleClass="mr-2" size="xlarge" shape="circle"></p-avatar>
+                    </div>
                     <div>
                         <div class="p-inputgroup">
                             <span class="p-inputgroup-addon"><i class="pi pi-user"></i></span>
@@ -109,20 +113,21 @@
                     </div>
                     <div>
                         <div class="p-inputgroup">
-                            <span class="p-inputgroup-addon"><i class="pi pi-calendar"></i></span>
-                            <input type="number" pInputText placeholder="Salary" formControlName="salario">
+                            <span class="p-inputgroup-addon"><i class="pi pi-phone"></i></span>
+                            <input type="number" min="0" pInputText placeholder="Phone" formControlName="telefono">
                         </div>
                     </div>
                     <div>
                         <div class="p-inputgroup">
-                            <span class="p-inputgroup-addon"><i class="pi pi-database"></i></span>
+                            <span class="p-inputgroup-addon"><i class="pi pi-at"></i></span>
                             <input type="email" pInputText placeholder="Email" formControlName="email">
                         </div>
                     </div>
                     <div>
                         <div class="p-inputgroup">
                             <span class="p-inputgroup-addon">€</span>
-                            <input type="number" min="0" pInputText placeholder="Phone" formControlName="telefono">
+                            <input type="number" pInputText placeholder="Salary" formControlName="salario">
+
                         </div>
                     </div>
 
@@ -135,12 +140,13 @@
                             optionValue="value"></p-selectButton>
                     </div>
                     <div>
-                        <p-button (click)="newImageUpload()" label="Edit photo" styleClass="p-button-outlined p-button-warning"></p-button>
+                        <p-button (click)="newImageUpload()" label="Edit photo"
+                            styleClass="p-button-outlined p-button-warning"></p-button>
                     </div>
-                    
+
                 </div>
             </div>
-            
+
         </form>
 
         <ng-template pTemplate="footer">

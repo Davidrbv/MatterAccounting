@@ -34,6 +34,7 @@ export class EmployeesComponent implements OnInit {
     private photoService : PhotoService
   ) {
     this.employeeForm = new FormGroup({
+      employeeId : new FormControl(),
       nombre: new FormControl(),
       puesto: new FormControl(),
       salario: new FormControl(),
@@ -115,13 +116,14 @@ export class EmployeesComponent implements OnInit {
 
   editEmployee(employee: Employee) {
     this.displayEditForm = true;
-    this.employeeService.getEmployee(employee.employeeId).subscribe((data) => {
+    this.employeeService.getEmployee(employee.employeeId).subscribe((data) => { 
       this.employeeForm.patchValue(data);
     });
   }
 
   /* Cancel toast */
   editCancel() {
+    this.employeeForm.reset();
     this.messageService.add({
       severity: 'info',
       summary: 'Editing cancel..',
@@ -137,7 +139,7 @@ export class EmployeesComponent implements OnInit {
     this.displayEditForm = false;
     setTimeout(() => {
       this.employeeForm.reset();
-    }, 500);
+    }, 1000);
     this.messageService.add({
       severity: 'info',
       summary: 'Editing employee..',
