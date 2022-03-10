@@ -54,4 +54,4 @@ permitiendonos mantener los datos para cada vez que hacemos uso de la app
 <img src="media/sales.png" alt="Logo" width="300" height="300">
 <img src="media/employee.png" alt="Logo" width="300" height="300">
 <img src="media/galery.png" alt="Logo" width="300" height="300">
-<img src="statics.png" alt="Logo" width="300" height="300">
+<img src="media/statics.png" alt="Logo" width="300" height="300">
