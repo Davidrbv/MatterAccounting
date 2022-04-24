@@ -1,7 +1,7 @@
-import { Injectable } from '@angular/core';
-import { Observable } from 'rxjs';
-import { User } from 'src/app/model/user';
-import { AuthService } from './auth.service';
+import { Injectable } from "@angular/core";
+import { Observable } from "rxjs";
+import { User } from "src/app/model/user";
+import { AuthService } from "./auth.service";
 import {
   addDoc,
   collection,
@@ -10,12 +10,12 @@ import {
   doc,
   docData,
   Firestore,
-  setDoc,
-} from '@angular/fire/firestore';
-import { Storage } from '@capacitor/storage';
+  setDoc
+} from "@angular/fire/firestore";
+import { Storage } from "@capacitor/storage";
 
 @Injectable({
-  providedIn: 'root',
+  providedIn: "root"
 })
 export class UserService {
   constructor(private authService: AuthService, private fireStore: Firestore) {}
@@ -28,7 +28,7 @@ export class UserService {
         `users/${this.authService.getCurrentUser().uid}/user/${id}`
       ),
       {
-        idField: 'userId',
+        idField: "userId"
       }
     ) as Observable<User>;
   }
@@ -41,7 +41,7 @@ export class UserService {
         `users/${this.authService.getCurrentUser().uid}/user`
       ),
       {
-        idField: 'userId',
+        idField: "userId"
       }
     ) as Observable<User[]>;
   }
@@ -81,14 +81,14 @@ export class UserService {
   async saveDateIntoStorage(): Promise<Boolean> {
     const date = new Date();
     await Storage.set({
-      key: 'date',
-      value: date.toString(),
+      key: "date",
+      value: date.toString()
     });
     return true;
   }
 
   async getDateFromStorage(): Promise<String> {
-    const tc = await Storage.get({ key: 'date' });
-    return tc.value!.toString() ? tc.value!.toString() : 'Welcome human!!';
+    const tc = await Storage.get({ key: "date" });
+    return tc.value!.toString() ? tc.value!.toString() : "Welcome human!!";
   }
 }

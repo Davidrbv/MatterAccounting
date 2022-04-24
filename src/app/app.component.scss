@@ -1,14 +1,15 @@
 ::ng-deep .p-panel-header {
-  background-color: white !important;
+  background-color: rgb(102, 94, 94) !important;
 }
 
 ::ng-deep .p-panel-footer {
   padding: 0 !important;
-  background-color: rgb(252, 0, 0) !important;
+  background-color: rgb(102, 94, 94) !important;
 }
 
-img{
-  width: 10%;
+.header-logo{
+  width: 25%;
+  background-color: rgb(102, 94, 94);
 }
 
 .footer {
@@ -23,3 +24,8 @@ img{
   justify-content: center;
   text-align: center;
 }
+
+.footer-img{
+  width: 10%;
+}
+

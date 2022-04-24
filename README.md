@@ -1,57 +1,36 @@
-<!-- LOGO PROYECTO -->
-<br />
-<p align="center">
+<h2 align="center">PROYECTO GRADO SUPERIOR EN DESARROLLO DE APLICACIONES MULTIPLATAFORMA I.E.S. CAMPANILLAS 21/22</h2>
+<div align="center">
+  <img src="media/logoCompleto.svg" alt="Logo" width="200" height="250">
+  <h3 align="center">Matter Accounting</h3>
+</div>
 
-  <img src="media/matters.png" alt="Logo" width="200" height="250">
 
-  <h3 align="center">MatterAccounting</h3>
-  
-</p>
+## INTRODUCCIÓN
+Como complemento de la App 'Matter Movil', actualmente en desarrollo, y pensando en las necesidades del cliente, este proyecto pretende ampliar las posibilidades de gestión de nuestro negocio, además de dar la posibilidad al cliente de gestionar su empresa desde otro tipo de dispositivo. Además, permitirá a los administradores de la App gestionar los usuarios que actualmente usen la aplicaciñón.   
 
-<br>
+## OBJETIVO
+El objetivo principal es potenciar la calidad de la información que vamos almacenando, así como facilitar la gestión de las necesidades del cliente por parte de los administradores de forma facil e intuitiva.
 
-## Sobre el proyecto
-MattersAccounting es una aplicación dedicada al registro de gastos e ingresos
-de cualquier tipo de negocio, para el control de los mismos y la visualización
-a través de gráficas del rendimiento del negocio.
-Surge como ampliación de la App Matter desarrollada en Ionic.
+## DESARROLLO
+Para el desarrollo de este proyecto, haremos uso de Angular, Typescript, PrimeNg, Capacitor, Cordova, Firebase añadiendo algunas características especiales a la aplicación desarrollada para la versión movil.
+Es importante resaltar, que tanto la versión web como la versión movil harán uso de la misma información almacenada en la base de datos.
 
-HomePAge: https://github.com/Davidrbv/MatterAccounting/tree/master/src/app
-
-## Estructura del proyecto
-<ul>
-  <li>8 Componentes</li>
-  <li>6 Servicios</li>
-  <li>5 Interfaces</li>
-</ul>
-
-<br>
-
-Se hace uso de capacitor para la persistencia de la información,
-permitiendonos mantener los datos para cada vez que hacemos uso de la app
-
-## Technologies Used
-
-<a href="https://github.com/angular/angular">
-    <img src="media/logoAngular.png" alt="Logo" width="220" height="100">
-</a>
-
-<br>
-
-<a href="https://www.typescriptlang.org/">
-    <img src="media/typeLogo.png" alt="Logo" width="220" height="100">
-</a>
-
-<br>
-
-<a href="https://www.https://www.primefaces.org/primeng">
-    <img src="media/logoprime.png" alt="Logo" width="220" height="100">
-</a>
+## DIARIO DE TRABAJO
+<a href="https://github.com/Davidrbv/Matters/blob/master/README.md"><p>Pulse aquí.</p></a>
+## BIBLIOGRAFÍA
+  - <a href="https://angular.io/"><p>Angular</p></a>
+  - <a href="https://www.primefaces.org/primeng/"><p>PrimeNg</p></a>
+  - <a href="https://capacitorjs.com/"><p>Capacitor</p></a>
+  - <a href="https://ionicframework.com/docs/native/iamport-cordova"><p>Cordova</p></a>
+  - <a href="https://console.firebase.google.com/u/2/"><p>Firebase</p></a>
+  - <a href="https://www.typescriptlang.org/docs/"><p>TypeScript</p></a>
+  - <a href="https://es.stackoverflow.com/"><p>StackOverflow</p></a>
 
 ## Mockup App
-<img src="media/login.png" alt="Logo" width="300" height="300">
-<img src="media/facturasAccounting.png" alt="Logo" width="300" height="300">
-<img src="media/sales.png" alt="Logo" width="300" height="300">
-<img src="media/employee.png" alt="Logo" width="300" height="300">
-<img src="media/galery.png" alt="Logo" width="300" height="300">
-<img src="statics.png" alt="Logo" width="300" height="300">
+<h5>Versión actual de la interfaz - 24/04/22<h5>
+<img src="media/login.png" alt="LoginPhoto">
+<img src="media/invoices.png" alt="InvoicesPhoto">
+<img src="media/sales.png" alt="SalesPhoto">
+<img src="media/employee.png" alt="EmployeesPhoto">
+<img src="media/galery.png" alt="GaleryPhoto">
+<img src="media/statics.png" alt="StaticsPhoto">

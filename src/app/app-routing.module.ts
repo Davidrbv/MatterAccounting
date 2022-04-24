@@ -6,13 +6,14 @@ import { FormularioFacturasComponent } from './componentes/formulario-facturas/f
 import { FormularioVentasComponent } from './componentes/formulario-ventas/formulario-ventas.component';
 import { GaleryComponent } from './componentes/galery/galery.component';
 import { LoginComponent } from './componentes/login/login.component';
-
+import { ToastComponent } from './componentes/toast/toast.component';
+import { AdministrationComponent } from './componentes/administration/administration.component';
 import {
   AuthGuard,
   redirectLoggedInTo,
   redirectUnauthorizedTo,
 } from '@angular/fire/auth-guard';
-import { ToastComponent } from './componentes/toast/toast.component';
+
 
 //Guarda para denegación de acceso a las urls si no se está logueado.
 const redirectUnauthorizedToLogin = () => redirectUnauthorizedTo(['login']);
@@ -64,6 +65,13 @@ const routes: Routes = [
   {
     path: 'estadisticas',
     component: EstadisticasComponent,
+    pathMatch: 'full',
+    canActivate: [AuthGuard],
+    data: { authGuardPipe: redirectUnauthorizedToLogin },
+  },
+  {
+    path: 'administration',
+    component: AdministrationComponent,
     pathMatch: 'full',
     canActivate: [AuthGuard],
     data: { authGuardPipe: redirectUnauthorizedToLogin },

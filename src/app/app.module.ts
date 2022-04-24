@@ -48,6 +48,7 @@ import { MessageModule } from 'primeng/message';
 import { ToastModule } from 'primeng/toast';
 import { ToastComponent } from './componentes/toast/toast.component';
 import { BadgeModule } from "primeng/badge";
+import { AdministrationComponent } from './componentes/administration/administration.component';
 
 
 @NgModule({
@@ -60,6 +61,7 @@ import { BadgeModule } from "primeng/badge";
     EmployeesComponent,
     GaleryComponent,
     ToastComponent,
+    AdministrationComponent
   ],
   imports: [
     BrowserModule,

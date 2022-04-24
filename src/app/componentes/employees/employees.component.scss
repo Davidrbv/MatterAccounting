@@ -49,19 +49,21 @@ span {
   }
 
   .product-image {
-    width: 8em;
-    height: 8em;
+    width: 10em;
+    height: 10em;
     box-shadow: 0 3px 6px rgba(0, 0, 0, 0.16), 0 3px 6px rgba(0, 0, 0, 0.23);
   }
-}
-
-.image {
-  max-width: 50%;
 }
 
 .avatar{
   display: flex;
   align-items: center;
   justify-content: center;
+}
+
+.avatar-image{
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
 
