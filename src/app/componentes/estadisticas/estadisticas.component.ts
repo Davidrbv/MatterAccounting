@@ -33,11 +33,11 @@ export class EstadisticasComponent implements OnInit {
   chefSalary: number = 0;
   employeesSalarys: number = 0;
 
-  invoiceAnnually : number[] = [];
-  invoicesMonthly: number[] = [0,0,0,0,0,0,0,0,0,0,0,0];
+  invoiceAnnually: number[] = [];
+  invoicesMonthly: number[] = [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0];
 
-  saleAnnually : number[] = [];
-  salesMonthly: number[] = [0,0,0,0,0,0,0,0,0,0,0,0];
+  saleAnnually: number[] = [];
+  salesMonthly: number[] = [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0];
 
   employeesAnnually: number[] = [];
   waitersSalarys: number[] = [];
@@ -50,7 +50,6 @@ export class EstadisticasComponent implements OnInit {
   ) {}
 
   ngOnInit() {
-
     this.invoicesCostMonthly();
     this.invoicesCostAnnually();
     this.salesIngressMonthly();
@@ -66,15 +65,15 @@ export class EstadisticasComponent implements OnInit {
           label: "Waiter",
           backgroundColor: "#8A17F7",
           data: this.waitersSalarys,
-          borderColor: "white",
+          borderColor: "#6A0062",
           borderWidth: 2
         },
         {
           type: "bar",
           label: "Chef",
-          backgroundColor: "#EF7400",
+          backgroundColor: "#F69B40",
           data: this.chefsSalarys,
-          borderColor: "white",
+          borderColor: "#EF7400",
           borderWidth: 2
         }
       ]
@@ -89,7 +88,7 @@ export class EstadisticasComponent implements OnInit {
           label: "Sales",
           backgroundColor: "#00BB2D",
           data: this.salesMonthly,
-          borderColor: "white",
+          borderColor: "black",
           borderWidth: 2
         },
         {
@@ -97,7 +96,7 @@ export class EstadisticasComponent implements OnInit {
           label: "Invoices",
           backgroundColor: "#FF0000",
           data: this.invoicesMonthly,
-          borderColor: "white",
+          borderColor: "black",
           borderWidth: 2
         }
       ]
@@ -108,29 +107,34 @@ export class EstadisticasComponent implements OnInit {
       labels: ["Sales", "Invoices", "Employees"],
       datasets: [
         {
-          data: [this.saleAnnually, this.invoiceAnnually, this.employeesAnnually],
-          backgroundColor: ["#00BB2D","#FF0000", "#581845"],
-          hoverBackgroundColor: ["#FF6384", "#00BB21", "#581845"]
+          data: [
+            this.saleAnnually,
+            this.invoiceAnnually,
+            this.employeesAnnually
+          ],
+          backgroundColor: ["#13A30A", "#A60000", "#1B88BE"],
+          hoverBackgroundColor: ["#1BD70F", "#FF6C6C", "#20B4FE"]
         }
       ]
     };
   }
 
   //  INVOICES COST  //
-  invoicesCostMonthly(){
+  invoicesCostMonthly() {
     this.invoiceService.getInvoices().subscribe(item => {
       item.forEach(invoice => {
         const tempDate = new Date(invoice.fecha);
         const invoiceDate = tempDate.getMonth();
-        const invoiceTemp= invoice.cantidad + this.invoicesMonthly[invoiceDate];
-        this.invoicesMonthly.splice(invoiceDate,1,invoiceTemp);
-      });     
+        const invoiceTemp =
+          invoice.cantidad + this.invoicesMonthly[invoiceDate];
+        this.invoicesMonthly.splice(invoiceDate, 1, invoiceTemp);
+      });
     });
   }
 
-  invoicesCostAnnually(){
-    this.invoiceService.getInvoices().subscribe((item) => {
-      item.forEach((invoice) => {
+  invoicesCostAnnually() {
+    this.invoiceService.getInvoices().subscribe(item => {
+      item.forEach(invoice => {
         this.invoice += invoice.cantidad;
       });
       this.invoiceAnnually.push(this.invoice);
@@ -138,20 +142,20 @@ export class EstadisticasComponent implements OnInit {
   }
 
   //  SALES INGRESS  //
-  salesIngressMonthly(){
+  salesIngressMonthly() {
     this.saleService.getSales().subscribe(item => {
       item.forEach(sale => {
-        const fecha = new Date(sale.fecha)
+        const fecha = new Date(sale.fecha);
         const saleDate = fecha.getMonth();
         const saleTemp = sale.total + this.salesMonthly[saleDate];
-        this.salesMonthly.splice(saleDate,1,saleTemp);
-      }); 
+        this.salesMonthly.splice(saleDate, 1, saleTemp);
+      });
     });
   }
 
-  salesIngressAnnually(){
-    this.saleService.getSales().subscribe((item) => {
-      item.forEach((sale) => {
+  salesIngressAnnually() {
+    this.saleService.getSales().subscribe(item => {
+      item.forEach(sale => {
         this.sale += sale.total;
       });
       this.saleAnnually.push(this.sale);
@@ -159,24 +163,22 @@ export class EstadisticasComponent implements OnInit {
   }
 
   //  EMPLOYEES COST  //
-
-  employeesCostAnnually(){
-    this.employeeService.getEmployees().subscribe(item =>{
+  employeesCostAnnually() {
+    this.employeeService.getEmployees().subscribe(item => {
       const months = new Date().getMonth();
       item.forEach(employee => {
-        if(employee.puesto === 'chef'){
-          this.chefSalary += employee.salario 
-        }else if(employee.puesto === 'Waiter'){
-          this.waiterSalary += employee.salario
+        if (employee.puesto === "chef") {
+          this.chefSalary += employee.salario;
+        } else if (employee.puesto === "Waiter") {
+          this.waiterSalary += employee.salario;
         }
         this.employeesSalarys += employee.salario;
       });
-      this.employeesAnnually.push(this.employeesSalarys)
+      this.employeesAnnually.push(this.employeesSalarys);
       for (let i = 0; i < months; i++) {
-        this.chefsSalarys.push(this.chefSalary)
-      this.waitersSalarys.push(this.waiterSalary)
+        this.chefsSalarys.push(this.chefSalary);
+        this.waitersSalarys.push(this.waiterSalary);
       }
-      
-    })
+    });
   }
 }
