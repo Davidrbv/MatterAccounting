@@ -27,11 +27,19 @@ Es importante resaltar, que tanto la versión web como la versión movil harán 
   - <a href="https://es.stackoverflow.com/"><p>StackOverflow</p></a>
 
 ## Mockup App
+<<<<<<< HEAD
 
+=======
+>>>>>>> 1f2304018b015dd45f78e580d326c8cf716dd78c
 <h5>Versión actual de la interfaz - 24/04/22<h5>
 <img src="media/login.png" alt="LoginPhoto">
 <img src="media/invoices.png" alt="InvoicesPhoto">
 <img src="media/sales.png" alt="SalesPhoto">
 <img src="media/employee.png" alt="EmployeesPhoto">
 <img src="media/galery.png" alt="GaleryPhoto">
+<<<<<<< HEAD
 <img src="media/statics.png" alt="StaticsPhoto">
+=======
+<img src="media/statics.png" alt="StaticsPhoto">
+
+>>>>>>> 1f2304018b015dd45f78e580d326c8cf716dd78c
