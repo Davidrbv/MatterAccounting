@@ -1,8 +1,8 @@
-import { DatePipe } from '@angular/common';
 import { Component, OnInit } from '@angular/core';
 import { Message, MessageService } from 'primeng/api';
 import { AuthService } from 'src/app/services/auth.service';
 import { UserService } from 'src/app/services/user.service';
+import { getAuth, signInWithPopup, GoogleAuthProvider } from 'firebase/auth';
 
 @Component({
   selector: 'app-login',
@@ -15,9 +15,11 @@ export class LoginComponent implements OnInit {
   password: string = '';
   msg: Message[] = [];
   date: string = '';
+  recovery = false;
+  send = false;
 
   constructor(
-    private authService: AuthService,
+    public authService: AuthService,
     private messageService: MessageService,
     private userService: UserService
   ) {}
@@ -26,7 +28,9 @@ export class LoginComponent implements OnInit {
     
   }
 
+  // LogIn
   async login() {
+    this.recovery = false;
     if (this.email !== '' && this.password !== '') {
       const connectionSuccess = await this.authService.login(
         this.email,
@@ -35,7 +39,7 @@ export class LoginComponent implements OnInit {
       if (connectionSuccess) {
         this.userService.getDateFromStorage().then(data => {
           if(data !== null) this.date = data.toString();
-          else this.date = 'Welcome home, huma!!'
+          else this.date = 'Welcome home, human!!'
           this.msg = [{
             severity: 'success',
             summary: 'Hello!!',
@@ -48,20 +52,27 @@ export class LoginComponent implements OnInit {
         }, 2000);
       }
     } else {
-      this.msg = [
-        {
-          severity: 'error',
-          summary: 'Error',
-          detail: 'Email & Password not found. Please, try again.',
-        },
-      ];
-      setTimeout(() => {
-        this.msg = [];
-      }, 2000);
+      if(!this.send && !this.recovery){
+        this.msg = [
+          {
+            severity: 'error',
+            summary: 'Error',
+            detail: 'Email & Password not found. Please, try again.',
+          },
+        ];
+        setTimeout(() => {
+          this.msg = [];
+        }, 2000);
+      }
     }
+    this.email = '';
+    this.password = '';
+    this.sendEmail();
   }
 
+  // LogOut
   logOut() {
+    this.recovery = false;
     this.authService.logOut();
     if (this.authService.getCurrentUser()) {
       this.messageService.add({
@@ -77,5 +88,87 @@ export class LoginComponent implements OnInit {
         this.msg = [];
       }, 2000);
     }
+  }
+
+  // Set Buttons
+  recoveryPass(){
+    this.send = true;
+    this.recovery = true;
+  }
+
+  // Send Email To Reset Password
+  sendEmail(){
+    this.send = false;
+    this.recovery = false;
+    if(this.email !== ""){
+      this.authService.recoveryPass(this.email)
+      .then(
+        () => {
+          this.msg = [
+            {
+              severity: 'success',
+              summary: 'An email has been sent to you with the following information.',
+              detail: 'Good a nice day!!',
+            },
+          ];
+          setTimeout(() => {
+            this.msg = [];
+          }, 2000);
+        }
+      )
+      .catch(
+        () => {
+          this.msg = [
+            {
+              severity: 'error',
+              summary: 'Unregistered email address.',
+              detail: 'Sorry!!',
+            },
+          ];
+          setTimeout(() => {
+            this.msg = [];
+          }, 2000);
+        }
+      );
+    }else {
+      this.msg = [
+        {
+          severity: 'warn',
+          summary: 'You must fill the filed.',
+          detail: 'Please',
+        },
+      ];
+      setTimeout(() => {
+        this.msg = [];
+      }, 2000);
+    }
+    this.email = '';
+  }
+
+  // Google Authentication
+  googleAuthentication() {
+    this.recovery = false;
+    const provider = new GoogleAuthProvider();
+    const auth = getAuth();
+    signInWithPopup(auth, provider)
+      .then((result) => {
+        this.userService.getUsers().subscribe(user => {
+          if(user.length !== 1){
+            this.userService.addUser({email: `${result.user.email}`, nombre: `${result.user.displayName}`,image: `${result.user.photoURL}`})
+          }
+        });          
+      })
+      .catch((error) => {
+        this.msg = [
+          {
+            severity: 'success',
+            summary: 'Welcome.',
+            detail: 'Good a nice day!!',
+          },
+        ];
+        setTimeout(() => {
+          this.msg = [];
+        }, 2000);
+      });
   }
 }

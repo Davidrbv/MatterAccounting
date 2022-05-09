@@ -23,6 +23,7 @@ import { HttpClientModule } from '@angular/common/http';
 import { MultiSelectModule } from 'primeng/multiselect';
 import { TableModule } from 'primeng/table';
 import { ChartModule } from 'primeng/chart';
+import { ChipModule } from 'primeng/chip';
 
 import { initializeApp, provideFirebaseApp } from '@angular/fire/app';
 import { environment } from '../environments/environment';
@@ -88,6 +89,7 @@ import { AdministrationComponent } from './componentes/administration/administra
     MessageModule,
     ToastModule,
     BadgeModule,
+    ChipModule,
     AngularFireModule.initializeApp(environment.firebase),
     provideFirebaseApp(() => initializeApp(environment.firebase)),
     provideAuth(() => getAuth()),

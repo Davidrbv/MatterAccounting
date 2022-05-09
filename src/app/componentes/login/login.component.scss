@@ -4,3 +4,13 @@ p {
   color: crimson;
   text-align: center;
 }
+
+:host ::ng-deep .p-chip.custom-chip {
+  background: var(--primary-color);
+  color: var(--primary-color-text);
+}
+
+.help{
+  font-size: 1.3em;
+  color: black;
+}

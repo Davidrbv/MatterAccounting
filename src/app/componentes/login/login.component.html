@@ -5,20 +5,27 @@
     </ng-template>
     <ng-template pTemplate="body">
         <div class="grid">
+            <span *ngIf="recovery" class="col-12 p-float-label">
+                <p class="help">Enter your email and we sent an email, thanks!</p>
+            </span>
             <span class="col-12 p-float-label">
                 <input class="col-12" type="email" pInputText [(ngModel)]="email"
                     pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,3}$" />
                 <label for="float-input">Email</label>
             </span>
             <div class="col-12"></div>
-            <span class="col-12 p-float-label">
+            <span *ngIf="!recovery" class="col-12 p-float-label">
                 <input class="col-12" type="password" pInputText [(ngModel)]="password" />
                 <label for="float-input">Password</label>
             </span>
     
             <div class="btn col-12 flex justify-content-evenly">
-                <button (click)="login()" pButton type="button" label="Login" class="p-button"></button>
-                <button (click)="logOut()" pButton type="button" label="LogOut" class="p-button-danger"></button>
+                <button *ngIf="!authService.getCurrentUser()" (click)="login()" pButton type="button" label="Login" class="p-button-success"></button>
+                <button *ngIf="!authService.getCurrentUser() && !send" (click)="recoveryPass()" pButton type="button"  label="Recovery Pass" icon="pi pi-key" class="bg-yellow-500 border-yellow-500"></button>
+                <button *ngIf="!authService.getCurrentUser() && !recovery" (click)="googleAuthentication()" pButton type="button"  label="GoogleAuth" icon="pi pi-google"></button>
+                <button *ngIf="!recovery" (click)="logOut()" pButton type="button" label="LogOut" class="p-button-danger"></button>
+                <button *ngIf="!authService.getCurrentUser() && send" (click)="sendEmail()" pButton type="button"  label="Send" icon="pi pi-key" class="bg-yellow-500 border-yellow-500"></button>
+
             </div>
         </div>
     </ng-template>

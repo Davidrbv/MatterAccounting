@@ -5,7 +5,7 @@
                 <img class="header-logo" src="../assets/logoCompleto.svg" alt="Logo Matters">
             </div>
             <div class="col 12 flex align-items-center justify-content-center mt-4">
-                <div class="col-1 flex align-items-center justify-content-center">
+                <div *ngIf="authService.getCurrentUser()" class="col-1 flex align-items-center justify-content-center">
                     <button pButton type="button" label="Login" class="p-button boton" [routerLink]="['/login']"
                         routerLinkActive="active"></button>
                 </div>
@@ -21,10 +21,10 @@
                     <button pButton type="button" label="Employees" class="p-button-warning"
                         [routerLink]="['/employees']" routerLinkActive="active"></button>
                 </div>
-                <!-- <div *ngIf="authService.getCurrentUser()" class="col-1 flex align-items-center justify-content-center">
+                <div *ngIf="authService.getCurrentUser()" class="col-1 flex align-items-center justify-content-center">
                     <button pButton type="button" label="Galery" class="flex bg-pink-500 border-pink-500"
                         [routerLink]="['/galery']" routerLinkActive="active"></button>
-                </div> -->
+                </div>
                 <div *ngIf="authService.getCurrentUser()" class="col-1 flex align-items-center justify-content-center">
                     <button pButton type="button" label="Statics" class="p-button-secondary"
                         [routerLink]="['/estadisticas']" routerLinkActive="active"></button>
