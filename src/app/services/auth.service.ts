@@ -1,4 +1,4 @@
-import { Injectable } from '@angular/core';
+import { Injectable } from "@angular/core";
 import {
   Auth,
   createUserWithEmailAndPassword,
@@ -6,14 +6,13 @@ import {
   sendPasswordResetEmail,
   signInWithEmailAndPassword,
   User,
-  signOut,
-} from '@angular/fire/auth';
+  signOut
+} from "@angular/fire/auth";
 
 @Injectable({
-  providedIn: 'root',
+  providedIn: "root"
 })
 export class AuthService {
-  
   constructor(private auth: Auth) {}
 
   /* Log with Firebase */

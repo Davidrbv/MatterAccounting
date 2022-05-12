@@ -4,7 +4,9 @@ p {
   font-size: 30px;
   color: rgb(255, 0, 0);
   margin-bottom: 30px;
+  font-family: 'Microgramma D OT Extended', sans-serif;
 }
+
 h2 {
   color: crimson;
 }
@@ -31,7 +33,7 @@ span {
   box-shadow: 0px 0px 5px 5px grey;
 }
 
-.formEdit > div {
+.formEdit>div {
   margin: 2%;
 }
 
@@ -55,15 +57,14 @@ span {
   }
 }
 
-.avatar{
+.avatar {
   display: flex;
   align-items: center;
   justify-content: center;
 }
 
-.avatar-image{
+.avatar-image {
   display: flex;
   justify-content: center;
   align-items: center;
 }
-

@@ -1,17 +1,21 @@
-import { Component, OnInit, ViewChild } from '@angular/core';
-import { ConfirmationService, ConfirmEventType, MessageService } from 'primeng/api';
-import { Galleria } from 'primeng/galleria';
-import { Observable } from 'rxjs';
-import { Photo } from 'src/app/model/photo';
-import { PhotoService } from 'src/app/services/photo.service';
+import { Component, OnInit, ViewChild } from "@angular/core";
+import {
+  ConfirmationService,
+  ConfirmEventType,
+  MessageService
+} from "primeng/api";
+import { Galleria } from "primeng/galleria";
+import { Observable } from "rxjs";
+import { Photo } from "src/app/model/photo";
+import { PhotoService } from "src/app/services/photo.service";
 
 @Component({
-  selector: 'app-galery',
-  templateUrl: './galery.component.html',
-  styleUrls: ['./galery.component.scss'],
+  selector: "app-galery",
+  templateUrl: "./galery.component.html",
+  styleUrls: ["./galery.component.scss"]
 })
 export class GaleryComponent implements OnInit {
-  @ViewChild('galleria') galleria: Galleria = {} as Galleria;
+  @ViewChild("galleria") galleria: Galleria = {} as Galleria;
 
   images: Observable<Photo[]> = {} as Observable<Photo[]>;
   image: any;
@@ -29,17 +33,17 @@ export class GaleryComponent implements OnInit {
   ) {
     this.responsiveOptions = [
       {
-        breakpoint: '1024px',
-        numVisible: 5,
+        breakpoint: "1024px",
+        numVisible: 5
       },
       {
-        breakpoint: '768px',
-        numVisible: 3,
+        breakpoint: "768px",
+        numVisible: 3
       },
       {
-        breakpoint: '560px',
-        numVisible: 1,
-      },
+        breakpoint: "560px",
+        numVisible: 1
+      }
     ];
   }
   ngOnInit() {
@@ -48,7 +52,7 @@ export class GaleryComponent implements OnInit {
   }
 
   async addPhoto() {
-    const path = 'UsersGalery';
+    const path = "UsersGalery";
     this.image = await this.photoService.addPicture();
     const res = await this.photoService.uploadFile(this.image, path);
     this.image = res;
@@ -56,16 +60,16 @@ export class GaleryComponent implements OnInit {
     this.photoService.addPhoto(this.newPhoto);
   }
 
-  confirmDeleteInvoice(image: Photo) {
+  confirmDeletePhoto(image: Photo) {
     this.confirmationService.confirm({
-      message: 'Are you sure that you want to delete this image?',
-      header: 'Confirmation',
-      icon: 'pi pi-exclamation-triangle',
+      message: "Are you sure that you want to delete this image?",
+      header: "Confirmation",
+      icon: "pi pi-exclamation-triangle",
       accept: () => {
         this.messageService.add({
-          severity: 'info',
-          summary: 'Confirmed',
-          detail: 'You have accepted',
+          severity: "info",
+          summary: "Confirmed",
+          detail: "You have accepted"
         });
         this.photoService.deletePhoto(image.photoId);
       },
@@ -73,20 +77,20 @@ export class GaleryComponent implements OnInit {
         switch (type) {
           case ConfirmEventType.REJECT:
             this.messageService.add({
-              severity: 'error',
-              summary: 'Rejected',
-              detail: 'You have rejected',
+              severity: "error",
+              summary: "Rejected",
+              detail: "You have rejected"
             });
             break;
           case ConfirmEventType.CANCEL:
             this.messageService.add({
-              severity: 'warn',
-              summary: 'Cancelled',
-              detail: 'You have cancelled',
+              severity: "warn",
+              summary: "Cancelled",
+              detail: "You have cancelled"
             });
             break;
         }
-      },
+      }
     });
   }
 
@@ -103,18 +107,18 @@ export class GaleryComponent implements OnInit {
   }
 
   openPreviewFullScreen() {
-    let elem = this.galleria.element.nativeElement.querySelector('.p-galleria');
+    let elem = this.galleria.element.nativeElement.querySelector(".p-galleria");
     if (elem.requestFullscreen) {
       elem.requestFullscreen();
-    } else if (elem['mozRequestFullScreen']) {
+    } else if (elem["mozRequestFullScreen"]) {
       /* Firefox */
-      elem['mozRequestFullScreen']();
-    } else if (elem['webkitRequestFullscreen']) {
+      elem["mozRequestFullScreen"]();
+    } else if (elem["webkitRequestFullscreen"]) {
       /* Chrome, Safari & Opera */
-      elem['webkitRequestFullscreen']();
-    } else if (elem['msRequestFullscreen']) {
+      elem["webkitRequestFullscreen"]();
+    } else if (elem["msRequestFullscreen"]) {
       /* IE/Edge */
-      elem['msRequestFullscreen']();
+      elem["msRequestFullscreen"]();
     }
   }
 
@@ -130,27 +134,27 @@ export class GaleryComponent implements OnInit {
 
   bindDocumentListeners() {
     this.onFullScreenListener = this.onFullScreenChange.bind(this);
-    document.addEventListener('fullscreenchange', this.onFullScreenListener);
-    document.addEventListener('mozfullscreenchange', this.onFullScreenListener);
+    document.addEventListener("fullscreenchange", this.onFullScreenListener);
+    document.addEventListener("mozfullscreenchange", this.onFullScreenListener);
     document.addEventListener(
-      'webkitfullscreenchange',
+      "webkitfullscreenchange",
       this.onFullScreenListener
     );
-    document.addEventListener('msfullscreenchange', this.onFullScreenListener);
+    document.addEventListener("msfullscreenchange", this.onFullScreenListener);
   }
 
   unbindDocumentListeners() {
-    document.removeEventListener('fullscreenchange', this.onFullScreenListener);
+    document.removeEventListener("fullscreenchange", this.onFullScreenListener);
     document.removeEventListener(
-      'mozfullscreenchange',
+      "mozfullscreenchange",
       this.onFullScreenListener
     );
     document.removeEventListener(
-      'webkitfullscreenchange',
+      "webkitfullscreenchange",
       this.onFullScreenListener
     );
     document.removeEventListener(
-      'msfullscreenchange',
+      "msfullscreenchange",
       this.onFullScreenListener
     );
     this.onFullScreenListener = null;
@@ -161,12 +165,12 @@ export class GaleryComponent implements OnInit {
   }
 
   galleriaClass() {
-    return `custom-galleria ${this.fullscreen ? 'fullscreen' : ''}`;
+    return `custom-galleria ${this.fullscreen ? "fullscreen" : ""}`;
   }
 
   fullScreenIcon() {
-    return `pi ${
-      this.fullscreen ? 'pi-window-minimize' : 'pi-window-maximize'
-    }`;
+    return `pi ${this.fullscreen
+      ? "pi-window-minimize"
+      : "pi-window-maximize"}`;
   }
 }

@@ -1,161 +1,162 @@
 <p>Employees Register</p>
 <!-- Employees form -->
 <form [formGroup]="employeeForm" class="formulario">
-    <div class="grid encuadre">
-        <div class="col-12">
-            <div class="grid">
-                <div class="col-2">
-                    <div class="p-inputgroup">
-                        <span class="p-inputgroup-addon"><i class="pi pi-user"></i></span>
-                        <input type="text" pInputText placeholder="Name" formControlName="nombre">
-                    </div>
-                </div>
-                <div class="col-2">
-                    <div class="p-inputgroup">
-                        <span class="p-inputgroup-addon"><i class="pi pi-euro"></i></span>
-                        <input type="number" min="0" pInputText placeholder="Salary" formControlName="salario">
-                    </div>
-                </div>
-                <div class="col-2">
-                    <div class="p-inputgroup">
-                        <span class="p-inputgroup-addon"><i class="pi pi-at"></i></span>
-                        <input type="email" pInputText placeholder="Email" formControlName="email">
-                    </div>
-                </div>
-                <div class="col-2">
-                    <div class="p-inputgroup">
-                        <span class="p-inputgroup-addon"><i class="pi pi-phone"></i></span>
-                        <input type="number" min="0" pInputText placeholder="Phone" formControlName="telefono">
-                    </div>
-                </div>
-                <div class="col-2">
-                    <div class="p-inputgroup flex justify-content-center align-items-center">
-                        <p-selectButton [options]="stateOptionsGenre" optionLabel="label" formControlName="genero"
-                            optionValue="value"></p-selectButton>
-                    </div>
-                </div>
-                <div class="col-2">
-                    <div class="p-inputgroup flex justify-content-center align-items-center">
-                        <p-selectButton [options]="stateOptionsJob" optionLabel="label" formControlName="puesto"
-                            optionValue="value"></p-selectButton>
-                    </div>
-                </div>
-                <div class="col-12 flex justify-content-evenly align-items-center">
-                    <button pButton type="button" label="Save" class="p-button-success boton" icon="pi pi-check"
-                        iconPos="right" (click)="onSubmit()"></button>
-                    <button pButton type="button" label="Add Photo" class="p-button-primary boton" icon="pi pi-check"
-                        iconPos="right" (click)="newImageUpload()"></button>
-                </div>
-            </div>
+  <div class="grid encuadre">
+    <div class="col-12">
+      <div class="grid">
+        <div class="col-2">
+          <div class="p-inputgroup">
+            <span class="p-inputgroup-addon"><i class="pi pi-user"></i></span>
+            <input type="text" pInputText placeholder="Name" formControlName="nombre">
+          </div>
         </div>
+        <div class="col-2">
+          <div class="p-inputgroup">
+            <span class="p-inputgroup-addon"><i class="pi pi-euro"></i></span>
+            <input type="number" min="0" pInputText placeholder="Salary" formControlName="salario">
+          </div>
+        </div>
+        <div class="col-2">
+          <div class="p-inputgroup">
+            <span class="p-inputgroup-addon"><i class="pi pi-at"></i></span>
+            <input type="email" pInputText placeholder="Email" formControlName="email">
+          </div>
+        </div>
+        <div class="col-2">
+          <div class="p-inputgroup">
+            <span class="p-inputgroup-addon"><i class="pi pi-phone"></i></span>
+            <input type="number" min="0" pInputText placeholder="Phone" formControlName="telefono">
+          </div>
+        </div>
+        <div class="col-2">
+          <div class="p-inputgroup flex justify-content-center align-items-center">
+            <p-selectButton [options]="stateOptionsGenre" optionLabel="label" formControlName="genero"
+              optionValue="value"></p-selectButton>
+          </div>
+        </div>
+        <div class="col-2">
+          <div class="p-inputgroup flex justify-content-center align-items-center">
+            <p-selectButton [options]="stateOptionsJob" optionLabel="label" formControlName="puesto"
+              optionValue="value"></p-selectButton>
+          </div>
+        </div>
+        <div class="col-12 flex justify-content-evenly align-items-center">
+          <button pButton type="button" label="Save" class="p-button-success boton" icon="pi pi-check" iconPos="right"
+            (click)="onSubmit()"></button>
+          <button pButton type="button" label="Add Photo" class="p-button-primary boton" icon="pi pi-check"
+            iconPos="right" (click)="newImageUpload()"></button>
+        </div>
+      </div>
     </div>
+  </div>
 </form>
 
 <!-- Employees carousel -->
 
 <div class="carusel">
-    <p-carousel [value]="(employees | async)!" [numVisible]="3" [numScroll]="3" [circular]="false"
-        [responsiveOptions]="responsiveOptions">
-        <ng-template pTemplate="header">
-            <p>- Employees -</p>
-        </ng-template>
-        <ng-template let-employee pTemplate="item">
-            <div class="product-item">
-                <div class="product-item-content">
-                    <div class="mb-1">
-                        <img [src]="employee.imagen || '../../../assets/empleados.png'" [alt]="employee.nombre"
-                            class="product-image" />
-                    </div>
-                    <div>
-                        <h2 class="mb-1">{{employee.nombre | titlecase}}</h2>
-                        <h4 class="mt-0 mb-3">{{employee.puesto | titlecase}}</h4>
-                        <h4 class="mt-0 mb-3"><i class="pi pi-phone"></i> {{employee.telefono}}</h4>
-                        <h4 class="mt-0 mb-3">{{employee.salario | currency : 'EUR'}}</h4>
-                        <h4 class="mt-0 mb-3"><i class="pi pi-at"></i> {{employee.email}}</h4>
-                        <h4 class="mt-0 mb-3">{{employee.genero === 'Woman.png' ? 'Woman' : 'Men'}}</h4>
-                        <div class="car-buttons mt-5">
-                            <p-button (click)="editEmployee(employee)" type="button"
-                                styleClass="p-button p-button-rounded mr-2" icon="pi pi-pencil">
-                            </p-button>
-                            <p-button (click)="confirmDeleteInvoice(employee)" type="button"
-                                styleClass="p-button-danger p-button-rounded mr-2" icon="pi pi-trash">
-                            </p-button>
-                        </div>
-                    </div>
-                </div>
+  <p-carousel [value]="(employees | async)!" [numVisible]="3" [numScroll]="3" [circular]="false"
+    [responsiveOptions]="responsiveOptions">
+    <ng-template pTemplate="header">
+      <p>- Employees -</p>
+    </ng-template>
+    <ng-template let-employee pTemplate="item">
+      <div class="product-item">
+        <div class="product-item-content">
+          <div class="mb-1">
+            <img [src]="employee.imagen || '../../../assets/empleados.png'" [alt]="employee.nombre"
+              class="product-image" />
+          </div>
+          <div>
+            <h2 class="mb-1">{{employee.nombre | titlecase}}</h2>
+            <h4 class="mt-0 mb-3">{{employee.puesto | titlecase}}</h4>
+            <h4 class="mt-0 mb-3"><i class="pi pi-phone"></i> {{employee.telefono}}</h4>
+            <h4 class="mt-0 mb-3">{{employee.salario | currency : 'EUR'}}</h4>
+            <h4 class="mt-0 mb-3"><i class="pi pi-at"></i> {{employee.email}}</h4>
+            <h4 class="mt-0 mb-3">{{employee.genero === 'Woman.png' ? 'Woman' : 'Men'}}</h4>
+            <div class="car-buttons mt-5">
+              <p-button (click)="editEmployee(employee)" type="button" styleClass="p-button p-button-rounded mr-2"
+                icon="pi pi-pencil">
+              </p-button>
+              <p-button (click)="confirmDeleteInvoice(employee)" type="button"
+                styleClass="p-button-danger p-button-rounded mr-2" icon="pi pi-trash">
+              </p-button>
             </div>
-        </ng-template>
-    </p-carousel>
-    <!-- Confirm delete dialog -->
-    <p-confirmDialog header="Confirmation" icon="pi pi-exclamation-triangle"></p-confirmDialog>
+          </div>
+        </div>
+      </div>
+    </ng-template>
+  </p-carousel>
+  <!-- Confirm delete dialog -->
+  <p-confirmDialog header="Confirmation" icon="pi pi-exclamation-triangle"></p-confirmDialog>
 </div>
 
 <!-- Edit Employee -->
 
 <div class="flex shadow-6">
-    <p-dialog [(visible)]="displayEditForm" [breakpoints]="{'960px': '75vw'}" [style]="{width: '30vw'}"
-        [draggable]="false" [resizable]="false">
-        <ng-template pTemplate="header">
-            <h1>Edit employee</h1>
-        </ng-template>
+  <p-dialog [(visible)]="displayEditForm" [breakpoints]="{'960px': '75vw'}" [style]="{width: '30vw'}"
+    [draggable]="false" [resizable]="false">
+    <ng-template pTemplate="header">
+      <h1>Edit employee</h1>
+    </ng-template>
 
-        <form [formGroup]="employeeForm" class="formulario">
-            <div class="card">
-                <div class="formEdit flex flex-column">
-                    <div class="avatar">
-                        <p-avatar class="avatar-image" [image]="employeeForm.value.imagen|| '../../../assets/empleados.png'" styleClass="mr-5" size="xlarge" shape="circle"></p-avatar>
-                    </div>
-                    <div>
-                        <div class="p-inputgroup">
-                            <span class="p-inputgroup-addon"><i class="pi pi-user"></i></span>
-                            <input type="text" pInputText placeholder="Name" formControlName="nombre">
-                        </div>
-                    </div>
-                    <div>
-                        <div class="p-inputgroup">
-                            <span class="p-inputgroup-addon"><i class="pi pi-phone"></i></span>
-                            <input type="number" min="0" pInputText placeholder="Phone" formControlName="telefono">
-                        </div>
-                    </div>
-                    <div>
-                        <div class="p-inputgroup">
-                            <span class="p-inputgroup-addon"><i class="pi pi-at"></i></span>
-                            <input type="email" pInputText placeholder="Email" formControlName="email">
-                        </div>
-                    </div>
-                    <div>
-                        <div class="p-inputgroup">
-                            <span class="p-inputgroup-addon">€</span>
-                            <input type="number" pInputText placeholder="Salary" formControlName="salario">
-
-                        </div>
-                    </div>
-
-                    <div>
-                        <p-selectButton [options]="stateOptionsGenre" optionLabel="label" formControlName="genero"
-                            optionValue="value"></p-selectButton>
-                    </div>
-                    <div>
-                        <p-selectButton [options]="stateOptionsJob" optionLabel="label" formControlName="puesto"
-                            optionValue="value"></p-selectButton>
-                    </div>
-                    <div>
-                        <p-button (click)="newImageUpload()" label="Edit photo"
-                            styleClass="p-button-outlined p-button-warning"></p-button>
-                    </div>
-
-                </div>
+    <form [formGroup]="employeeForm" class="formulario">
+      <div class="card">
+        <div class="formEdit flex flex-column">
+          <div class="avatar">
+            <p-avatar class="avatar-image" [image]="employeeForm.value.imagen|| '../../../assets/empleados.png'"
+              styleClass="mr-5" size="xlarge" shape="circle"></p-avatar>
+          </div>
+          <div>
+            <div class="p-inputgroup">
+              <span class="p-inputgroup-addon"><i class="pi pi-user"></i></span>
+              <input type="text" pInputText placeholder="Name" formControlName="nombre">
             </div>
+          </div>
+          <div>
+            <div class="p-inputgroup">
+              <span class="p-inputgroup-addon"><i class="pi pi-phone"></i></span>
+              <input type="number" min="0" pInputText placeholder="Phone" formControlName="telefono">
+            </div>
+          </div>
+          <div>
+            <div class="p-inputgroup">
+              <span class="p-inputgroup-addon"><i class="pi pi-at"></i></span>
+              <input type="email" pInputText placeholder="Email" formControlName="email">
+            </div>
+          </div>
+          <div>
+            <div class="p-inputgroup">
+              <span class="p-inputgroup-addon">€</span>
+              <input type="number" pInputText placeholder="Salary" formControlName="salario">
 
-        </form>
+            </div>
+          </div>
 
-        <ng-template pTemplate="footer">
-            <p-button (click)="editCancel()" label="Cancel" styleClass="p-button-outlined p-button-danger">
+          <div>
+            <p-selectButton [options]="stateOptionsGenre" optionLabel="label" formControlName="genero"
+              optionValue="value"></p-selectButton>
+          </div>
+          <div>
+            <p-selectButton [options]="stateOptionsJob" optionLabel="label" formControlName="puesto"
+              optionValue="value"></p-selectButton>
+          </div>
+          <div>
+            <p-button (click)="newImageUpload()" label="Edit photo" styleClass="p-button-outlined p-button-warning">
             </p-button>
-            <p-button (click)="updateEmployee()" type="submit" label="Save"
-                styleClass="p-button-outlined p-button-success"></p-button>
-        </ng-template>
-    </p-dialog>
+          </div>
+
+        </div>
+      </div>
+
+    </form>
+
+    <ng-template pTemplate="footer">
+      <p-button (click)="editCancel()" label="Cancel" styleClass="p-button-outlined p-button-danger">
+      </p-button>
+      <p-button (click)="updateEmployee()" type="submit" label="Save" styleClass="p-button-outlined p-button-success">
+      </p-button>
+    </ng-template>
+  </p-dialog>
 </div>
 
 <p-toast></p-toast>

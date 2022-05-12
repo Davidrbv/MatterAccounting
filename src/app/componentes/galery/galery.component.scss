@@ -1,20 +1,16 @@
-::ng-deep .p-panel-content{
-  display: flex !important;
-  justify-content: center !important;
-}
-
-h1{
+h1 {
   text-align: center;
   font-size: 4rem;
-  margin: 120px;
+  font-family: 'Microgramma D OT Extended', sans-serif;
 }
 
-.card{
+.card {
   min-width: 500px;
   margin-bottom: 40px;
 }
 
 :host ::ng-deep .custom-galleria {
+  margin: auto;
   &.p-galleria {
     &.fullscreen {
       display: flex;
@@ -47,7 +43,7 @@ h1{
       background-color: rgba(0, 0, 0, 0.9);
       color: #ffffff;
 
-      > button {
+      >button {
         background-color: transparent;
         color: #ffffff;
         border: 0 none;
@@ -65,7 +61,7 @@ h1{
     }
 
     .title-container {
-      > span {
+      >span {
         overflow-x: hidden;
         font-size: 0.9rem;
         padding-left: 0.829rem;
@@ -78,8 +74,8 @@ h1{
   }
 }
 
-.image{
-    width: 50%;
-    background-size: cover;
-    overflow: hidden;
+.image {
+  width: 50%;
+  background-size: cover;
+  overflow: hidden;
 }

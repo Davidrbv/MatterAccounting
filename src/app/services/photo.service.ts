@@ -1,6 +1,6 @@
-import { Injectable } from '@angular/core';
-import { finalize } from 'rxjs/operators';
-import { AngularFireStorage } from '@angular/fire/compat/storage';
+import { Injectable } from "@angular/core";
+import { finalize } from "rxjs/operators";
+import { AngularFireStorage } from "@angular/fire/compat/storage";
 import {
   addDoc,
   collection,
@@ -9,15 +9,15 @@ import {
   Firestore,
   deleteDoc,
   setDoc,
-  docData,
-} from '@angular/fire/firestore';
-import { Camera, CameraResultType, CameraSource } from '@capacitor/camera';
-import { Observable } from 'rxjs';
-import { Photo } from '../model/photo';
-import { AuthService } from './auth.service';
+  docData
+} from "@angular/fire/firestore";
+import { Camera, CameraResultType, CameraSource } from "@capacitor/camera";
+import { Observable } from "rxjs";
+import { Photo } from "../model/photo";
+import { AuthService } from "./auth.service";
 
 @Injectable({
-  providedIn: 'root',
+  providedIn: "root"
 })
 export class PhotoService {
   constructor(
@@ -33,26 +33,26 @@ export class PhotoService {
       quality: 60,
       allowEditing: false,
       resultType: CameraResultType.Uri,
-      source: CameraSource.Photos,
+      source: CameraSource.Photos
     });
-    const blob = await fetch(image.webPath!).then((i) => i.blob());
+    const blob = await fetch(image.webPath!).then(i => i.blob());
     return blob;
   }
 
   /* Save Photo in Storage */
 
   uploadFile(file: any, path: string): Promise<string> {
-
-    const nameIdPhoto = this.authService.getCurrentUser().uid + '/' + Date.now().toString();
-    return new Promise((resolve) => {
+    const nameIdPhoto =
+      this.authService.getCurrentUser().uid + "/" + Date.now().toString();
+    return new Promise(resolve => {
       const filePath = `${path}/${nameIdPhoto}`;
-      const ref = this.storage.ref(filePath);      
+      const ref = this.storage.ref(filePath);
       const task = ref.put(file);
       task
         .snapshotChanges()
         .pipe(
           finalize(() => {
-            ref.getDownloadURL().subscribe((res) => {
+            ref.getDownloadURL().subscribe(res => {
               const downloadURL = res;
               resolve(downloadURL);
               return;
@@ -71,7 +71,7 @@ export class PhotoService {
         `users/${this.authService.getCurrentUser().uid}/photos/${id}`
       ),
       {
-        idField: 'photoId',
+        idField: "photoId"
       }
     ) as Observable<Photo>;
   }
@@ -84,7 +84,7 @@ export class PhotoService {
         `users/${this.authService.getCurrentUser().uid}/photos`
       ),
       {
-        idField: 'photoId',
+        idField: "photoId"
       }
     ) as Observable<Photo[]>;
   }

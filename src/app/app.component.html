@@ -1,57 +1,111 @@
 <p-panel class="ion-no-padding ion-no-margin">
-    <ng-template pTemplate="header" class="grid">
-        <div class="container col-12">
-            <div class="col 12 flex justify-content-center align-items-center">
-                <img class="header-logo" src="../assets/logoCompleto.svg" alt="Logo Matters">
-            </div>
-            <div class="col 12 flex align-items-center justify-content-center mt-4">
-                <div *ngIf="authService.getCurrentUser()" class="col-1 flex align-items-center justify-content-center">
-                    <button pButton type="button" label="Login" class="p-button boton" [routerLink]="['/login']"
-                        routerLinkActive="active"></button>
-                </div>
-                <div *ngIf="authService.getCurrentUser()" class="col-1 flex align-items-center justify-content-center">
-                    <button pButton type="button" label="Sales" class="p-button-success"
-                        [routerLink]="['/formulario-ventas']" routerLinkActive="active"></button>
-                </div>
-                <div *ngIf="authService.getCurrentUser()" class="col-1 flex align-items-center justify-content-center">
-                    <button pButton type="button" label="Invoices" class="p-button-danger"
-                        [routerLink]="['/formulario-facturas']" routerLinkActive="active"></button>
-                </div>
-                <div *ngIf="authService.getCurrentUser()" class="col-1 flex align-items-center justify-content-center">
-                    <button pButton type="button" label="Employees" class="p-button-warning"
-                        [routerLink]="['/employees']" routerLinkActive="active"></button>
-                </div>
-                <div *ngIf="authService.getCurrentUser()" class="col-1 flex align-items-center justify-content-center">
-                    <button pButton type="button" label="Galery" class="flex bg-pink-500 border-pink-500"
-                        [routerLink]="['/galery']" routerLinkActive="active"></button>
-                </div>
-                <div *ngIf="authService.getCurrentUser()" class="col-1 flex align-items-center justify-content-center">
-                    <button pButton type="button" label="Statics" class="p-button-secondary"
-                        [routerLink]="['/estadisticas']" routerLinkActive="active"></button>
-                </div>
-                <div *ngIf="authService.getCurrentUser()" class="col-1 flex align-items-center justify-content-center">
-                    <button pButton type="button" label="Administration" class="flex align-items-center justify-content-center bg-orange-600 border-orange-600"
-                        [routerLink]="['/administration']" routerLinkActive="active"></button>
-                </div>
-            </div>
+  <ng-template pTemplate="header" class="grid">
+    <div class="bubbles">
+      <div class="bubble"></div>
+      <div class="bubble"></div>
+      <div class="bubble"></div>
+      <div class="bubble"></div>
+      <div class="bubble"></div>
+      <div class="bubble"></div>
+      <div class="bubble"></div>
+      <div class="bubble"></div>
+      <div class="bubble"></div>
+      <div class="bubble"></div>
+      <div class="bubble"></div>
+      <div class="bubble"></div>
+      <div class="bubble"></div>
+      <div class="bubble"></div>
+      <div class="bubble"></div>
+      <div class="bubble"></div>
+      <div class="bubble"></div>
+      <div class="bubble"></div>
+      <div class="bubble"></div>
+      <div class="bubble"></div>
+      <div class="bubble"></div>
+      <div class="bubble"></div>
+      <div class="bubble"></div>
+      <div class="bubble"></div>
+      <div class="bubble"></div>
+      <div class="bubble"></div>
+      <div class="bubble"></div>
+      <div class="bubble"></div>
+      <div class="bubble"></div>
+      <div class="bubble"></div>
+      <div class="bubble"></div>
+      <div class="bubble"></div>
+      <div class="bubble"></div>
+      <div class="bubble"></div>
+      <div class="bubble"></div>
+      <div class="bubble"></div>
+      <div class="bubble"></div>
+      <div class="bubble"></div>
+      <div class="bubble"></div>
+      <div class="bubble"></div>
+      <div class="bubble"></div>
+      <div class="bubble"></div>
+      <div class="bubble"></div>
+      <div class="bubble"></div>
+      <div class="bubble"></div>
+      <div class="bubble"></div>
+      <div class="bubble"></div>
+      <div class="bubble"></div>
+      <div class="bubble"></div>
+      <div class="bubble"></div>
+    </div>
+    <div class="container col-12">
+      
+      <div class="col 12 flex justify-content-center align-items-center">
+        <img class="header-logo" src="../assets/logoCompleto.svg" alt="Logo Matters">
+      </div>
+      <div class="col 12 flex align-items-center justify-content-center mt-4">
+        <div *ngIf="authService.getCurrentUser()" class="col-1 flex align-items-center justify-content-center">
+          <button pButton type="button" label="Login" class="p-button boton" [routerLink]="['/login']"
+            routerLinkActive="active"></button>
         </div>
-    </ng-template>
-    <ng-template pTemplate="body" class="template flex align-items-right justify-content-end">
-
-    </ng-template>
-
-    <ng-template pTemplate="footer">
-        <div class="footer flex justify-content-around align-items-center">
-            <div>
-                <h3>David Rodríguez - Barbero Verdera</h3>
-            </div>
-            <div>
-                <img class="footer-img" src="../assets/cuboLogo.svg" alt="Logo matter">
-            </div>
-            <div>
-                <h3> &#9400; All rights reserved</h3>
-            </div>
+        <div *ngIf="authService.getCurrentUser()" class="col-1 flex align-items-center justify-content-center">
+          <button pButton type="button" label="Sale" class="p-button-success" [routerLink]="['/formulario-ventas']"
+            routerLinkActive="active"></button>
         </div>
-    </ng-template>
-    <router-outlet></router-outlet>
+        <div *ngIf="authService.getCurrentUser()" class="col-1 flex align-items-center justify-content-center">
+          <button pButton type="button" label="Invoice" class="p-button-danger" [routerLink]="['/formulario-facturas']"
+            routerLinkActive="active"></button>
+        </div>
+        <div *ngIf="authService.getCurrentUser()" class="col-1 flex align-items-center justify-content-center">
+          <button pButton type="button" label="Team" class="p-button-warning" [routerLink]="['/employees']"
+            routerLinkActive="active"></button>
+        </div>
+        <div *ngIf="authService.getCurrentUser()" class="col-1 flex align-items-center justify-content-center">
+          <button pButton type="button" label="Galery" class="flex bg-pink-500 border-pink-500"
+            [routerLink]="['/galery']" routerLinkActive="active"></button>
+        </div>
+        <div *ngIf="authService.getCurrentUser()" class="col-1 flex align-items-center justify-content-center">
+          <button pButton type="button" label="Stats" class="p-button-secondary" [routerLink]="['/estadisticas']"
+            routerLinkActive="active"></button>
+        </div>
+        <div *ngIf="authService.getCurrentUser()" class="col-1 flex align-items-center justify-content-center">
+          <button pButton type="button" label="Admin"
+            class="flex align-items-center justify-content-center bg-orange-600 border-orange-600"
+            [routerLink]="['/administration']" routerLinkActive="active"></button>
+        </div>
+      </div>
+    </div>
+  </ng-template>
+  <ng-template pTemplate="body" class="template flex align-items-right justify-content-end">
+
+  </ng-template>
+
+  <ng-template pTemplate="footer">
+    <div class="footer flex justify-content-around align-items-center">
+      <div>
+        <h3>David Rodríguez - Barbero Verdera</h3>
+      </div>
+      <div>
+        <img class="footer-img" src="../assets/cuboLogo.svg" alt="Logo matter">
+      </div>
+      <div>
+        <h3> &#9400; All rights reserved</h3>
+      </div>
+    </div>
+  </ng-template>
+  <router-outlet></router-outlet>
 </p-panel>

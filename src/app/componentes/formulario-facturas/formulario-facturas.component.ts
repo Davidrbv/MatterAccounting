@@ -34,7 +34,7 @@ export class FormularioFacturasComponent implements OnInit {
       estado: new FormControl()
     });
     this.stateOptions = [
-      { label: "Unpaid", value: false},
+      { label: "Unpaid", value: false },
       { label: "Paid", value: true }
     ];
   }
@@ -68,7 +68,6 @@ export class FormularioFacturasComponent implements OnInit {
   }
 
   /* Update edit invoice */
-
   async updateInvoice() {
     if (
       this.invoiceForm.value.codigo !== null &&
@@ -76,8 +75,8 @@ export class FormularioFacturasComponent implements OnInit {
       this.invoiceForm.value.cantidad !== null &&
       this.invoiceForm.value.proveedor !== null &&
       this.invoiceForm.value.estado !== null &&
-      this.invoiceForm.value.codigo !== '' &&
-      this.invoiceForm.value.proveedor !== ''
+      this.invoiceForm.value.codigo !== "" &&
+      this.invoiceForm.value.proveedor !== ""
     ) {
       await this.invoiceService.updateInvoice(this.invoiceForm.value);
       setTimeout(() => {
@@ -106,6 +105,7 @@ export class FormularioFacturasComponent implements OnInit {
     });
   }
 
+  /* Cancel edition */
   editCancel() {
     this.messageService.add({
       severity: "info",
@@ -116,7 +116,6 @@ export class FormularioFacturasComponent implements OnInit {
   }
 
   /* Confirm delete invoice */
-
   confirmDeleteInvoice(invoice: Invoice) {
     this.confirmationService.confirm({
       message: "Are you sure that you want to delete this invoice?",

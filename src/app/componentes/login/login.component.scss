@@ -3,6 +3,7 @@ p {
   font-weight: bold;
   color: crimson;
   text-align: center;
+  font-family: 'Microgramma D OT Extended', sans-serif;
 }
 
 :host ::ng-deep .p-chip.custom-chip {
@@ -10,7 +11,7 @@ p {
   color: var(--primary-color-text);
 }
 
-.help{
+.help {
   font-size: 1.3em;
   color: black;
 }

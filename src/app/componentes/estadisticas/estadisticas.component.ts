@@ -15,6 +15,7 @@ export class EstadisticasComponent implements OnInit {
   employeesOptions: any;
   salesInvoicesOptions: any;
   resultsOptions: any;
+
   months: string[] = [
     "Enero",
     "Febrero",
@@ -46,10 +47,7 @@ export class EstadisticasComponent implements OnInit {
   waitersSalarys: number[] = [];
   chefsSalarys: number[] = [];
 
-  constructor(
-    private http: HttpClient,
-    private authService : AuthService
-  ) {}
+  constructor(private http: HttpClient, private authService: AuthService) {}
 
   ngOnInit() {
     this.invoicesCostMonthly();
@@ -57,10 +55,6 @@ export class EstadisticasComponent implements OnInit {
     this.salesIngressMonthly();
     this.salesIngressAnnually();
     this.employeesCostAnnually();
-
-    console.log(this.saleAnnually);
-    console.log(this.invoiceAnnually);
-    console.log(this.employeesAnnually);
 
     // Employees
     this.employeesOptions = {
@@ -126,31 +120,38 @@ export class EstadisticasComponent implements OnInit {
   }
 
   // API CALLS
-  getInvoices(): Observable<Invoice[]>{
-    return this.http.get<Invoice[]>(`http://localhost:8080/invoice`,{params : {id:this.authService.getCurrentUser().uid}})
+  getInvoices(): Observable<Invoice[]> {
+    return this.http.get<Invoice[]>(`http://localhost:8080/invoice`, {
+      params: { id: this.authService.getCurrentUser().uid }
+    });
   }
 
-  getSales(): Observable<Sale[]>{
-    return this.http.get<Sale[]>(`http://localhost:8080/sale`,{params : {id:this.authService.getCurrentUser().uid}})
+  getSales(): Observable<Sale[]> {
+    return this.http.get<Sale[]>(`http://localhost:8080/sale`, {
+      params: { id: this.authService.getCurrentUser().uid }
+    });
   }
 
-  getEmployees(): Observable<Employee[]>{
-    return this.http.get<Employee[]>(`http://localhost:8080/employee`,{params : {id:this.authService.getCurrentUser().uid}})
+  getEmployees(): Observable<Employee[]> {
+    return this.http.get<Employee[]>(
+      `http://localhost:8080/employee/${this.authService.getCurrentUser().uid}`
+    );
   }
 
-  //  INVOICES COST  //
+  //  INVOICES COST MONTHLY  //
   invoicesCostMonthly() {
-   this.getInvoices().subscribe(item => {
+    this.getInvoices().subscribe(item => {
       item.forEach(invoice => {
         const tempDate = new Date(invoice.fecha);
         const invoiceDate = tempDate.getMonth();
         const invoiceTemp =
-        invoice.cantidad + this.invoicesMonthly[invoiceDate];
+          invoice.cantidad + this.invoicesMonthly[invoiceDate];
         this.invoicesMonthly.splice(invoiceDate, 1, invoiceTemp);
       });
     });
   }
 
+  // INVOICES COST ANNUALLY  //
   invoicesCostAnnually() {
     this.getInvoices().subscribe(item => {
       item.forEach(invoice => {
@@ -160,7 +161,7 @@ export class EstadisticasComponent implements OnInit {
     });
   }
 
-  //  SALES INGRESS  //
+  //  SALES INGRESS MONTHLY  //
   salesIngressMonthly() {
     this.getSales().subscribe(item => {
       item.forEach(sale => {
@@ -172,6 +173,7 @@ export class EstadisticasComponent implements OnInit {
     });
   }
 
+  // SALES INGRESS ANNUALLY  //
   salesIngressAnnually() {
     this.getSales().subscribe(item => {
       item.forEach(sale => {
@@ -181,12 +183,12 @@ export class EstadisticasComponent implements OnInit {
     });
   }
 
-  //  EMPLOYEES COST  //
+  //  EMPLOYEES BY WORKS //
   employeesCostAnnually() {
     this.getEmployees().subscribe(item => {
       const months = new Date().getMonth();
       item.forEach(employee => {
-        if (employee.puesto === "chef") {
+        if (employee.puesto === "Chef") {
           this.chefSalary += employee.salario;
         } else if (employee.puesto === "Waiter") {
           this.waiterSalary += employee.salario;
