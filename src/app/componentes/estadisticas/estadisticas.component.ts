@@ -12,23 +12,35 @@ import { AuthService } from "src/app/services/auth.service";
   styleUrls: ["./estadisticas.component.scss"]
 })
 export class EstadisticasComponent implements OnInit {
+  /* General information */
+  invoicesNumberPaid: number = 0;
+  invoicesNumberUnpaid: number = 0;
+  invoicesTotalPaid: number = 0;
+  invoicesTotalUnpaid: number = 0;
+
+  salesNumberPaid: number = 0;
+  salesNumberUnpaid: number = 0;
+  bestSaleDay: Sale = {} as Sale;
+  bestSaleMonth: number = 0;
+
+  /* Charts */
   employeesOptions: any;
   salesInvoicesOptions: any;
   resultsOptions: any;
 
   months: string[] = [
-    "Enero",
-    "Febrero",
-    "Marzo",
-    "Abril",
-    "Mayo",
-    "Junio",
-    "Julio",
-    "Agosto",
-    "Septiembre",
-    "Octubre",
-    "Noviembre",
-    "Diciembre"
+    "January",
+    "February",
+    "March",
+    "April",
+    "May",
+    "Jun",
+    "July",
+    "August",
+    "September",
+    "October",
+    "November",
+    "December"
   ];
 
   invoice: number = 0;
@@ -50,6 +62,7 @@ export class EstadisticasComponent implements OnInit {
   constructor(private http: HttpClient, private authService: AuthService) {}
 
   ngOnInit() {
+    this.invoicesNumberState();
     this.invoicesCostMonthly();
     this.invoicesCostAnnually();
     this.salesIngressMonthly();
@@ -120,25 +133,43 @@ export class EstadisticasComponent implements OnInit {
   }
 
   // API CALLS
+  /* Get invoices information */
   getInvoices(): Observable<Invoice[]> {
     return this.http.get<Invoice[]>(`http://localhost:8080/invoice`, {
       params: { id: this.authService.getCurrentUser().uid }
     });
   }
 
+  /* Get Sales information */
   getSales(): Observable<Sale[]> {
     return this.http.get<Sale[]>(`http://localhost:8080/sale`, {
       params: { id: this.authService.getCurrentUser().uid }
     });
   }
 
+  /* Get employees information */
   getEmployees(): Observable<Employee[]> {
     return this.http.get<Employee[]>(
       `http://localhost:8080/employee/${this.authService.getCurrentUser().uid}`
     );
   }
 
-  //  INVOICES COST MONTHLY  //
+  /* Invoices number state */
+  invoicesNumberState() {
+    this.getInvoices().subscribe(item => {
+      item.forEach(invoice => {
+        if (invoice.estado == true) {
+          this.invoicesNumberPaid += 1;
+          this.invoicesTotalPaid += invoice.cantidad;
+        } else {
+          this.invoicesNumberUnpaid += 1;
+          this.invoicesTotalUnpaid += invoice.cantidad;
+        }
+      });
+    });
+  }
+
+  /* Invoices cost monthly */
   invoicesCostMonthly() {
     this.getInvoices().subscribe(item => {
       item.forEach(invoice => {
@@ -151,7 +182,7 @@ export class EstadisticasComponent implements OnInit {
     });
   }
 
-  // INVOICES COST ANNUALLY  //
+  /* Invoices cost annually */
   invoicesCostAnnually() {
     this.getInvoices().subscribe(item => {
       item.forEach(invoice => {
@@ -161,7 +192,7 @@ export class EstadisticasComponent implements OnInit {
     });
   }
 
-  //  SALES INGRESS MONTHLY  //
+  /*  Sales ingress monthly */
   salesIngressMonthly() {
     this.getSales().subscribe(item => {
       item.forEach(sale => {
@@ -170,20 +201,30 @@ export class EstadisticasComponent implements OnInit {
         const saleTemp = sale.total + this.salesMonthly[saleDate];
         this.salesMonthly.splice(saleDate, 1, saleTemp);
       });
+      this.salesMonthly.forEach(month => {
+        const bestMonth = 0;
+        if (month > bestMonth) {
+          this.bestSaleMonth = this.salesMonthly.indexOf(month) - 1;
+        }
+      });
     });
   }
 
-  // SALES INGRESS ANNUALLY  //
+  /* Sales ingress annually  */
   salesIngressAnnually() {
     this.getSales().subscribe(item => {
       item.forEach(sale => {
+        const betterSale = 0;
+        if (sale.total > betterSale) {
+          this.bestSaleDay = sale;
+        }
         this.sale += sale.total;
       });
       this.saleAnnually.push(this.sale);
     });
   }
 
-  //  EMPLOYEES BY WORKS //
+  /*  Employees by works */
   employeesCostAnnually() {
     this.getEmployees().subscribe(item => {
       const months = new Date().getMonth();

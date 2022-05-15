@@ -24,6 +24,7 @@ import { MultiSelectModule } from "primeng/multiselect";
 import { TableModule } from "primeng/table";
 import { ChartModule } from "primeng/chart";
 import { ChipModule } from "primeng/chip";
+import { TabViewModule } from 'primeng/tabview';
 
 import { initializeApp, provideFirebaseApp } from "@angular/fire/app";
 import { environment } from "../environments/environment";
@@ -89,6 +90,7 @@ import { AdministrationComponent } from "./componentes/administration/administra
     ToastModule,
     BadgeModule,
     ChipModule,
+    TabViewModule,
     AngularFireModule.initializeApp(environment.firebase),
     provideFirebaseApp(() => initializeApp(environment.firebase)),
     provideAuth(() => getAuth()),

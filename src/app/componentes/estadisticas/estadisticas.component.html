@@ -1,3 +1,63 @@
+<!-- General info -->
+<div class="info">
+  <p-tabView>
+    <!-- Invoice's information -->
+    <p-tabPanel header="Invoice">
+      <!-- Header -->
+      <div class="header col-12 flex align-items-center justify-content-center">
+        <h3 class="col-2 flex align-items-center justify-content-center">Paids</h3>
+        <h3 class="col-2 flex align-items-center justify-content-center">Unpaids</h3>
+        <h3 class="col-2 flex align-items-center justify-content-center">Total paid</h3>
+        <h3 class="col-2 flex align-items-center justify-content-center">Total unpaid</h3>
+        <h3 class="col-2 flex align-items-center justify-content-center">Monthly Average </h3>
+        <h3 class="col-2 flex align-items-center justify-content-center">Year</h3>
+      </div>
+      <!-- Info -->
+      <div class="info col-12 flex align-items-center justify-content-center">
+        <h4 class="col-2 flex align-items-center justify-content-center">{{invoicesNumberPaid}}</h4>
+        <h4 class="col-2 flex align-items-center justify-content-center">{{invoicesNumberUnpaid}}</h4>
+        <h4 class="col-2 flex align-items-center justify-content-center">{{invoicesTotalPaid}}€</h4>
+        <h4 class="col-2 flex align-items-center justify-content-center">{{invoicesTotalUnpaid}}€</h4>
+        <h4 class="col-2 flex align-items-center justify-content-center">{{(invoice/12).toFixed(2)}}€</h4>
+        <h4 class="col-2 flex align-items-center justify-content-center">{{invoice}}€</h4>
+      </div>
+    </p-tabPanel>
+    <!-- Sales's information -->
+    <p-tabPanel header="Sale">
+      <div class="header col-12 flex align-items-center justify-content-center">
+        <h3 class="col-2 flex align-items-center justify-content-center">Best Day</h3>
+        <h3 class="col-2 flex align-items-center justify-content-center">Best Month</h3>
+        <h3 class="col-2 flex align-items-center justify-content-center">Monthly Average</h3>
+        <h3 class="col-2 flex align-items-center justify-content-center">Total Year</h3>
+      </div>
+      <div class="info col-12 flex align-items-center justify-content-center">
+        <h4 class="col-2 flex align-items-center justify-content-center">{{bestSaleDay.fecha | date: 'dd/MM/yyyy'}}</h4>
+        <h4 class="col-2 flex align-items-center justify-content-center">{{months[bestSaleMonth]}}</h4>
+        <h4 class="col-2 flex align-items-center justify-content-center">{{(sale/12).toFixed(2)}}€</h4>
+        <h4 class="col-2 flex align-items-center justify-content-center">{{sale}}€</h4>
+      </div>
+    </p-tabPanel>
+    <p-tabPanel header="Employee">
+      <div class="header col-12 flex align-items-center justify-content-center">
+        <h3 class="col-2 flex align-items-center justify-content-center">Chefs Average</h3>
+        <h3 class="col-2 flex align-items-center justify-content-center">Waiters Average</h3>
+        <h3 class="col-2 flex align-items-center justify-content-center">Chefs Total</h3>
+        <h3 class="col-2 flex align-items-center justify-content-center">Waiters Total</h3>
+        <h3 class="col-2 flex align-items-center justify-content-center">Average</h3>
+        <h3 class="col-2 flex align-items-center justify-content-center">Total</h3>
+      </div>
+      <div class="info col-12 flex align-items-center justify-content-center">
+        <h4 class="col-2 flex align-items-center justify-content-center">{{chefSalary.toFixed(2)}}€</h4>
+        <h4 class="col-2 flex align-items-center justify-content-center">{{waiterSalary.toFixed(2)}}€</h4>
+        <h4 class="col-2 flex align-items-center justify-content-center">{{(chefSalary*12).toFixed(2)}}€</h4>
+        <h4 class="col-2 flex align-items-center justify-content-center">{{(waiterSalary*12).toFixed(2)}}€</h4>
+        <h4 class="col-2 flex align-items-center justify-content-center">{{chefSalary + waiterSalary}}€</h4>
+        <h4 class="col-2 flex align-items-center justify-content-center">{{(chefSalary + waiterSalary)*12}}€</h4>
+      </div>
+    </p-tabPanel>
+  </p-tabView>
+</div>
+<br>
 <!-- Graphs -->
 <div class="grid">
   <div class="col-6 card">

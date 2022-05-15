@@ -1,8 +1,28 @@
+h2{
+  text-align: center;
+}
+h3{
+  color: rgb(32, 25, 54);
+  font-weight: bold;
+}
+
+h4{
+  color: rgb(0, 141, 24);
+}
+
+.header{
+  padding: 0;
+  max-height: 20px;
+}
+
+
 .card {
   border: 1px solid black;
   box-shadow: 1px 1px 1px 1px grey;
 }
 
-h2{
-  text-align: center;
+.info{
+  position: relative;
 }
+
+
