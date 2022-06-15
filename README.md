@@ -1,7 +1,7 @@
 <h2 align="center">PROYECTO SAP GRADO SUPERIOR EN DESARROLLO DE APLICACIONES MULTIPLATAFORMA I.E.S. CAMPANILLAS 21/22</h2>
 <div align="center">
+<h3 align="center">Matter Accounting</h3>
   <img src="media/logoCompleto.svg" alt="Logo" width="200" height="200">
-  <h3 align="center">Matter Accounting</h3>
 </div>
 
 ## INTRODUCCIÓN
