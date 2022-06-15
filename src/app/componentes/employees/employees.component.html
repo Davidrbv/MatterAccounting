@@ -72,7 +72,7 @@
             <h4 class="mt-0 mb-3"><i class="pi pi-phone"></i> {{employee.telefono}}</h4>
             <h4 class="mt-0 mb-3">{{employee.salario | currency : 'EUR'}}</h4>
             <h4 class="mt-0 mb-3"><i class="pi pi-at"></i> {{employee.email}}</h4>
-            <h4 class="mt-0 mb-3">{{employee.genero === 'Woman.png' ? 'Woman' : 'Men'}}</h4>
+            <h4 class="mt-0 mb-3">{{employee.genero === 'famale' ? 'Woman' : 'Men'}}</h4>
             <div class="car-buttons mt-5">
               <p-button (click)="editEmployee(employee)" type="button" styleClass="p-button p-button-rounded mr-2"
                 icon="pi pi-pencil">

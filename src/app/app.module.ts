@@ -9,6 +9,7 @@ import { FormularioVentasComponent } from "./componentes/formulario-ventas/formu
 import { LoginComponent } from "./componentes/login/login.component";
 import { EmployeesComponent } from "./componentes/employees/employees.component";
 import { GaleryComponent } from "./componentes/galery/galery.component";
+import { AdministrationComponent } from "./componentes/administration/administration.component";
 
 import { EstadisticasComponent } from "./componentes/estadisticas/estadisticas.component";
 import { ReactiveFormsModule } from "@angular/forms";
@@ -25,6 +26,7 @@ import { TableModule } from "primeng/table";
 import { ChartModule } from "primeng/chart";
 import { ChipModule } from "primeng/chip";
 import { TabViewModule } from 'primeng/tabview';
+import { ProgressSpinnerModule } from 'primeng/progressspinner';
 
 import { initializeApp, provideFirebaseApp } from "@angular/fire/app";
 import { environment } from "../environments/environment";
@@ -50,7 +52,6 @@ import { MessageModule } from "primeng/message";
 import { ToastModule } from "primeng/toast";
 import { ToastComponent } from "./componentes/toast/toast.component";
 import { BadgeModule } from "primeng/badge";
-import { AdministrationComponent } from "./componentes/administration/administration.component";
 
 @NgModule({
   declarations: [
@@ -90,6 +91,7 @@ import { AdministrationComponent } from "./componentes/administration/administra
     ToastModule,
     BadgeModule,
     ChipModule,
+    ProgressSpinnerModule,
     TabViewModule,
     AngularFireModule.initializeApp(environment.firebase),
     provideFirebaseApp(() => initializeApp(environment.firebase)),

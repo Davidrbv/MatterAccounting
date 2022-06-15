@@ -89,6 +89,19 @@ export class PhotoService {
     ) as Observable<Photo[]>;
   }
 
+  /* Get All Photos to delete info by admin */
+  getPhotosToDelete(id : string): Observable<Photo[]> {
+    return collectionData(
+      collection(
+        this.fireStore,
+        `users/${id}/photos`
+      ),
+      {
+        idField: "photoId"
+      }
+    ) as Observable<Photo[]>;
+  }
+
   /* Add Photo in database */
   async addPhoto(photo: Photo) {
     await addDoc(
@@ -106,6 +119,16 @@ export class PhotoService {
       doc(
         this.fireStore,
         `users/${this.authService.getCurrentUser().uid}/photos/${id}`
+      )
+    );
+  }
+
+  /* Delete Photo info by Admin */
+  async deletePhotoInfo(id: string,uid: string) {
+    await deleteDoc(
+      doc(
+        this.fireStore,
+        `users/${uid}/photos/${id}`
       )
     );
   }

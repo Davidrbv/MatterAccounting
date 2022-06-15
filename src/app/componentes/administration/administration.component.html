@@ -1,4 +1,36 @@
-<h1>Welcome Administrator</h1>
-<div>
-  <img src="../../../assets/web-en-construccion.jpg" alt="Web under construction">
+<div *ngIf="admin; else noAdmin">
+  <h1>Welcome Administrator</h1>
+  <h2>Users Register Actually</h2>
+  <div class="cards__container" *ngIf="loading">
+    <div class="cards__container--card" *ngFor="let user of users">
+      <p-card [header]="user.nombre" [subheader]="user.email" styleClass="p-card-shadow">
+        <ng-template class="header" pTemplate="header">
+          <div class="cards__container--image">
+            <img class="userimg" [src]="user.image || '../../../assets/noImage.png' " alt="User Card">
+          </div>
+        </ng-template>
+        <ng-template pTemplate="footer">
+          <p-button *ngIf="user.admin" label="Make user" icon="pi pi-check" styleClass="p-button-primary"
+            (click)="changeAdmin(user)"></p-button>
+          <p-button *ngIf="!user.admin" label="Make admin" icon="pi pi-check" styleClass="p-button-success"
+            (click)="changeAdmin(user)"></p-button>
+          <p-button (click)="deleteUser(user.userId!!)" label="Delete" icon="pi pi-times" styleClass="p-button-danger"
+            [style]="{'margin-left': '.5em'}">
+          </p-button>
+        </ng-template>
+        <p *ngIf="user.delete"> This user must be deleted</p>
+      </p-card>
+    </div>
+  </div>
+  <div class="spinner" *ngIf="!loading">
+    <p-progressSpinner></p-progressSpinner>
+  </div>
 </div>
+<ng-template #noAdmin class="noadmin">
+  <h1>Sorry, but you haven't credentials for this module..</h1>
+  <div class="image">
+    <img src="../../../assets/noCredentials.jpg" alt="Access prohibited">
+  </div>
+</ng-template>
+
+<p-toast></p-toast>

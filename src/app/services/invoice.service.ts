@@ -45,6 +45,19 @@ export class InvoiceService {
     ) as Observable<Invoice[]>;
   }
 
+  /* Get Invoices to delete info by admin */
+  getInvoicesToDelete(id : string): Observable<Invoice[]> {
+    return collectionData(
+      collection(
+        this.fireStore,
+        `users/${id}/invoices`
+      ),
+      {
+        idField: "invoiceId"
+      }
+    ) as Observable<Invoice[]>;
+  }
+
   /* Add Invoice */
   async addInvoice(invoice: Invoice) {
     await addDoc(
@@ -62,6 +75,16 @@ export class InvoiceService {
       doc(
         this.fireStore,
         `users/${this.authService.getCurrentUser().uid}/invoices/${id}`
+      )
+    );
+  }
+
+  /* Delete Invoice Info by Admin */
+  async deleteInvoiceInfo(id: string,uid: string) {
+    await deleteDoc(
+      doc(
+        this.fireStore,
+        `users/${uid}/invoices/${id}`
       )
     );
   }

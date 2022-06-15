@@ -20,25 +20,25 @@ import { Storage } from "@capacitor/storage";
 export class UserService {
   constructor(private authService: AuthService, private fireStore: Firestore) {}
 
-  /* Get one User */
-  getUser(id: string): Observable<User> {
-    return docData(
-      doc(
-        this.fireStore,
-        `users/${this.authService.getCurrentUser().uid}/user/${id}`
-      ),
-      {
-        idField: "userId"
-      }
-    ) as Observable<User>;
-  }
-
   /* Get the only user in getCurrent User's Firebase */
   getUsers(): Observable<User[]> {
     return collectionData(
       collection(
         this.fireStore,
         `users/${this.authService.getCurrentUser().uid}/user`
+      ),
+      {
+        idField: "userId"
+      }
+    ) as Observable<User[]>;
+  }
+
+  /* Get info user to delete by admin */
+  getUsersToDelete(id : string): Observable<User[]> {
+    return collectionData(
+      collection(
+        this.fireStore,
+        `users/${id}/user`
       ),
       {
         idField: "userId"
@@ -58,11 +58,11 @@ export class UserService {
   }
 
   /* Delete User */
-  async deleteUser(id: string) {
+  async deleteUser(uid:string,id: string) {
     await deleteDoc(
       doc(
         this.fireStore,
-        `users/${this.authService.getCurrentUser().uid}/user/${id}`
+        `users/${uid}/user/${id}`
       )
     );
   }
@@ -73,6 +73,17 @@ export class UserService {
       doc(
         this.fireStore,
         `users/${this.authService.getCurrentUser().uid}/user/${user.userId}`
+      ),
+      user
+    );
+  }
+
+  /* Update Admin Status User */
+  async updateAdmin(uid: string, user: User) {
+    await setDoc(
+      doc(
+        this.fireStore,
+        `users/${uid}/user/${user.userId}`
       ),
       user
     );

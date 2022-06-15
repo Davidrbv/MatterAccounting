@@ -45,6 +45,19 @@ export class SaleService {
     ) as Observable<Sale[]>;
   }
 
+  /* Get all sales to delete info by admin*/
+  getSalesToDelete(id : string): Observable<Sale[]> {
+    return collectionData(
+      collection(
+        this.fireStore,
+        `users/${id}/sales`
+      ),
+      {
+        idField: "saleId"
+      }
+    ) as Observable<Sale[]>;
+  }
+
   /* Add Sale */
   async addSale(sale: Sale) {
     await addDoc(
@@ -62,6 +75,16 @@ export class SaleService {
       doc(
         this.fireStore,
         `users/${this.authService.getCurrentUser().uid}/sales/${id}`
+      )
+    );
+  }
+
+  /* Delete Sale Info by Admin*/
+  async deleteSaleInfo(id: string,uid : string) {
+    await deleteDoc(
+      doc(
+        this.fireStore,
+        `users/${uid}/sales/${id}`
       )
     );
   }

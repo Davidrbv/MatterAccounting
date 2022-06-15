@@ -35,6 +35,13 @@ export class EmployeeService {
     }) as Observable<Employee[]>;
   }
 
+  /* Get All Employees to delete info by admin*/
+  getEmployeesToDelete(id : string): Observable<Employee[]> {
+    return collectionData(collection(this.fireStore, `users/${id}/employees`), {
+      idField: "employeeId"
+    }) as Observable<Employee[]>;
+  }
+
   /* Add Employee */
   async addEmployee(employee: Employee) {
     await addDoc(collection(this.fireStore, this.pathToEmployees), employee);
@@ -43,6 +50,11 @@ export class EmployeeService {
   /* Delete Employee */
   async deleteEmployee(id: string) {
     await deleteDoc(doc(this.fireStore, `${this.pathToEmployees}/${id}`));
+  }
+
+  /* Delete Employee info By Admin */
+  async deleteEmployeeInfo(id: string, uid: string) {
+    await deleteDoc(doc(this.fireStore,`users/${uid}/employees/${id}`));
   }
 
   /* Update Employee */

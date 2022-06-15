@@ -7,4 +7,5 @@ export interface User {
   password2?: string;
   image?: any;
   admin?: boolean;
+  delete?: boolean;
 }

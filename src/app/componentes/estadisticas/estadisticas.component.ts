@@ -1,10 +1,6 @@
-import { HttpClient, HttpParams } from "@angular/common/http";
 import { Component, OnInit } from "@angular/core";
-import { Observable } from "rxjs";
-import { Employee } from "src/app/model/employee";
-import { Invoice } from "src/app/model/invoice";
 import { Sale } from "src/app/model/sale";
-import { AuthService } from "src/app/services/auth.service";
+import { FlaskService } from "src/app/services/flask.service";
 
 @Component({
   selector: "app-estadisticas",
@@ -12,6 +8,7 @@ import { AuthService } from "src/app/services/auth.service";
   styleUrls: ["./estadisticas.component.scss"]
 })
 export class EstadisticasComponent implements OnInit {
+
   /* General information */
   invoicesNumberPaid: number = 0;
   invoicesNumberUnpaid: number = 0;
@@ -59,7 +56,7 @@ export class EstadisticasComponent implements OnInit {
   waitersSalarys: number[] = [];
   chefsSalarys: number[] = [];
 
-  constructor(private http: HttpClient, private authService: AuthService) {}
+  constructor(private flaskService: FlaskService) {}
 
   ngOnInit() {
     this.invoicesNumberState();
@@ -132,31 +129,11 @@ export class EstadisticasComponent implements OnInit {
     };
   }
 
-  // API CALLS
-  /* Get invoices information */
-  getInvoices(): Observable<Invoice[]> {
-    return this.http.get<Invoice[]>(`http://localhost:8080/invoice`, {
-      params: { id: this.authService.getCurrentUser().uid }
-    });
-  }
-
-  /* Get Sales information */
-  getSales(): Observable<Sale[]> {
-    return this.http.get<Sale[]>(`http://localhost:8080/sale`, {
-      params: { id: this.authService.getCurrentUser().uid }
-    });
-  }
-
-  /* Get employees information */
-  getEmployees(): Observable<Employee[]> {
-    return this.http.get<Employee[]>(
-      `http://localhost:8080/employee/${this.authService.getCurrentUser().uid}`
-    );
-  }
+  
 
   /* Invoices number state */
   invoicesNumberState() {
-    this.getInvoices().subscribe(item => {
+    this.flaskService.getInvoices().subscribe(item => {
       item.forEach(invoice => {
         if (invoice.estado == true) {
           this.invoicesNumberPaid += 1;
@@ -171,7 +148,7 @@ export class EstadisticasComponent implements OnInit {
 
   /* Invoices cost monthly */
   invoicesCostMonthly() {
-    this.getInvoices().subscribe(item => {
+    this.flaskService.getInvoices().subscribe(item => {
       item.forEach(invoice => {
         const tempDate = new Date(invoice.fecha);
         const invoiceDate = tempDate.getMonth();
@@ -184,7 +161,7 @@ export class EstadisticasComponent implements OnInit {
 
   /* Invoices cost annually */
   invoicesCostAnnually() {
-    this.getInvoices().subscribe(item => {
+    this.flaskService.getInvoices().subscribe(item => {
       item.forEach(invoice => {
         this.invoice += invoice.cantidad;
       });
@@ -194,7 +171,7 @@ export class EstadisticasComponent implements OnInit {
 
   /*  Sales ingress monthly */
   salesIngressMonthly() {
-    this.getSales().subscribe(item => {
+    this.flaskService.getSales().subscribe(item => {
       item.forEach(sale => {
         const fecha = new Date(sale.fecha);
         const saleDate = fecha.getMonth();
@@ -212,7 +189,7 @@ export class EstadisticasComponent implements OnInit {
 
   /* Sales ingress annually  */
   salesIngressAnnually() {
-    this.getSales().subscribe(item => {
+    this.flaskService.getSales().subscribe(item => {
       item.forEach(sale => {
         const betterSale = 0;
         if (sale.total > betterSale) {
@@ -224,14 +201,14 @@ export class EstadisticasComponent implements OnInit {
     });
   }
 
-  /*  Employees by works */
+  /*  Employees by job */
   employeesCostAnnually() {
-    this.getEmployees().subscribe(item => {
+    this.flaskService.getEmployees().subscribe(item => {
       const months = new Date().getMonth();
       item.forEach(employee => {
-        if (employee.puesto === "Chef") {
+        if (employee.puesto === "chef") {
           this.chefSalary += employee.salario;
-        } else if (employee.puesto === "Waiter") {
+        } else if (employee.puesto === "waiter") {
           this.waiterSalary += employee.salario;
         }
         this.employeesSalarys += employee.salario;
@@ -242,5 +219,6 @@ export class EstadisticasComponent implements OnInit {
         this.waitersSalarys.push(this.waiterSalary);
       }
     });
+    
   }
 }

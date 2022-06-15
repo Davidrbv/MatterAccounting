@@ -17,6 +17,7 @@ export class LoginComponent implements OnInit {
   date: string = "";
   recovery = false;
   send = false;
+  control = false;
 
   constructor(
     public authService: AuthService,
@@ -24,7 +25,9 @@ export class LoginComponent implements OnInit {
     private userService: UserService
   ) {}
 
-  ngOnInit(): void {}
+  ngOnInit(): void {
+    this.control = false;
+  }
 
   // LogIn
   async login() {
@@ -67,11 +70,13 @@ export class LoginComponent implements OnInit {
     }
     this.email = "";
     this.password = "";
-    this.sendEmail();
+    this.send = false;
+    this.recovery = false;
   }
 
   // LogOut
   logOut() {
+    this.control= false;
     this.recovery = false;
     this.authService.logOut();
     if (this.authService.getCurrentUser()) {
@@ -143,7 +148,6 @@ export class LoginComponent implements OnInit {
     this.email = "";
   }
 
-  // Google Authentication
   googleAuthentication() {
     this.recovery = false;
     const provider = new GoogleAuthProvider();
@@ -151,11 +155,14 @@ export class LoginComponent implements OnInit {
     signInWithPopup(auth, provider)
       .then(result => {
         this.userService.getUsers().subscribe(user => {
-          if (user.length !== 1) {
+          if (user.length === 0 && !this.control) {
+            this.control = true;    
             this.userService.addUser({
+              admin: false,
               email: `${result.user.email}`,
               nombre: `${result.user.displayName}`,
-              image: `${result.user.photoURL}`
+              image: `${result.user.photoURL}`,
+              delete: false
             });
           }
         });

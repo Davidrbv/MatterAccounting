@@ -1,3 +1,51 @@
-h1{
-    text-align: center;
+h1,h2{
+  text-align: center;
+  font-weight: bold;
 }
+
+h2{
+  color: crimson;
+}
+
+p{
+  color: red;
+  font-weight: bold;
+}
+
+::ng-deep .p-card {
+  margin-top: 7%;
+  min-width: 100% !important;
+}
+
+::ng-deep .p-card-header {
+  display: flex !important;
+  justify-content: center !important;
+  align-items: center !important;
+}
+
+::ng-deep .p-card-body {
+  text-align: center;
+  margin-top: 3%;
+}
+
+.userimg{
+  width: 100px;
+  height: 100px;
+}
+
+.cards__container{
+  display: flex;
+  justify-content: space-evenly;
+  align-items: center;
+}
+
+.image{
+  display: flex;
+  justify-content: center;
+}
+
+.spinner{
+  display: flex;
+  justify-content: center;
+}
+
