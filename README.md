@@ -27,12 +27,27 @@ Es importante resaltar, que tanto la versión web como la versión movil harán 
 
 ## Mockup App Actual
 
+- <p>En la imagen que se muestra a continuación, podemos observar el Login o pantalla de acceso a la SPA. Cuenta con un botón de Login para ganar acceso al sistema con nuestra credenciales personales, un botón para recuperar la cuenta, uno más para la autenticación con google, y un útlimo botón para cerrar la sesión iniciada por el usuario.</p>
 <img src="media/loginnew.png" alt="LoginPhoto">
+
+- <p>En esta segunda imagen, podemos observar, en la parte superior, los botones de acceso a los diferentes módulos que componen la apliación. En concreo, nos encontramos dentro del módulo de facturas, donde podremos crear, modificar o eliminar las facturas pertinentes relacionadas con el desarrollo del negocio.</p>
 <img src="media/invoicesnew.png" alt="InvoicesPhoto">
+
+- <p>En la siguiente imagen se puede observar la estructura del módulo de ventas, con características similares al módulo de facturación, donde, como sucede en el módulo anterior, podremos filtar los elementos por cantidades, fechas o estados.</p>
 <img src="media/salesnew.png" alt="SalesPhoto">
+
+- <p>Como sucedía con la aplicación movil, también contamos con una pantalla de gestión de empleados, donde podremos crear y manipular dicha información en función de nuestras necesidades.</p>
 <img src="media/employeenew.png" alt="EmployeesPhoto">
+
+- <p>Contamos también, como ya lo haciamos con la aplicación movil, con una galería de imagenes relacionadas con nuestro negocio que podremos manipular con facilidad.</p>
 <img src="media/galerynew.png" alt="GaleryPhoto">
+
+- <p>A continuación, se muestra el módulo de estadísticas, el cual nos ofrecerá información de forma gráfica sobre el estado actual de la información contable de la empresa.
+En primer lugar nos encontraremos con tres pestañas que nos proporcionarán información general de interés sobre los principales activos de la empresa.
+Posteriormente, podremos observar una serie de gráficas que nos porporcionaran una imagen más viaul sobre el estado de gastos, costes y beneficios obtenidos por la empresa.</p>
 <img src="media/statisticsnew.png" alt="StatisticsPhoto">
+
+- <p>Por utimo, y de gran relevancia, nos encontramos con el módulo de administración, al que solo tendrán acceso los administradores del sistema pertenecientes a la empresa. Este módulo nos permitirá visualizar los diferentes usuarios registrados en el sistema, cambiar su estado de usuario (administrador o cliente) o eliminar, en caso de que fuera necesario, los usuarios que hayan solicitado la eliminación del registro en al aplicación.</p>
 <img src="media/adminnew.png" alt="AdminPhoto">
 
 ## Mockup App Inicial
