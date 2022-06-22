@@ -1,6 +1,6 @@
 ::ng-deep .p-panel-header {
   background-color: rgb(32, 25, 54) !important;
-  padding: 0;
+  padding: 0 !important;
 }
 
 ::ng-deep .p-panel-footer {
@@ -57,7 +57,7 @@ $sway-type: "sway-left-to-right",
 .bubbles {
   position: absolute;
   width: 100%;
-  height: 38vh;
+  height: 37vh;
   overflow: hidden;
 }
 
